@@ -3,14 +3,11 @@
 import React, { ReactElement, useState } from "react";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faGithub,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import {
   faArrowAltCircleDown,
   faBars,
+  faCirclePlus,
   faFileAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -78,50 +75,30 @@ function Navbar(props: Props): ReactElement {
                 />{" "}
                 Library
               </Link>
-              {/* <a
+            </li>
+            <li className="flex items-center">
+              <Link
                 className={
                   (props.transparent
                     ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                     : "text-gray-800 hover:text-gray-600") +
                   " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                 }
-                href="/library"
+                href="/add-book"
               >
                 <FontAwesomeIcon
-                  icon={faFileAlt}
+                  icon={faCirclePlus}
                   className={
                     (props.transparent
                       ? "lg:text-gray-300 text-gray-500"
                       : "text-gray-500") + " text-lg leading-lg mr-2"
                   }
                 />{" "}
-                Library
-              </a> */}
+                Add a Book
+              </Link>
             </li>
           </ul>
           <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-            <li className="flex items-center">
-              <Link
-                className={
-                  (props.transparent
-                    ? "lg:text-blue-800 lg:hover:text-gray-300 text-blue-800"
-                    : "text-gray-800 hover:text-gray-600") +
-                  " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                }
-                href="/add-book"
-              >
-                <FontAwesomeIcon
-                  icon={faFacebook}
-                  className={
-                    (props.transparent
-                      ? "lg:text-gray-300 text-gray-500"
-                      : "text-gray-500") + " text-lg leading-lg "
-                  }
-                />
-                <span className="lg:hidden inline-block ml-2">Add a Book</span>
-              </Link>
-            </li>
-
             <li className="flex items-center">
               <Link
                 className={

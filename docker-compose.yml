@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./client_app
+      dockerfile: Dockerfile
+    container_name: novellib
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client_app:/app
+      - /app/node_modules

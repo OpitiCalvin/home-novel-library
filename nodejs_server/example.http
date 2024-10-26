@@ -1,0 +1,50 @@
+@API_URL = https://testappa.opititechgeolabs.com/api
+
+##
+
+GET {{API_URL}}/genres HTTP/1.1
+
+###
+POST {{API_URL}}/genres HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Fiction"
+}
+
+###
+
+GET {{API_URL}}/authors HTTP/1.1
+
+###
+POST {{API_URL}}/authors HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Karin Slaughter",
+"bio": "Karin Slaughter is an American crime writer. She has written 24 novels, which have sold more than 40 million copies and have been published in 120 countries. Her first novel, Blindsighted, was published in 27 languages and made the Crime Writers' Association's Dagger Award shortlist for 'Best Thriller Debut' of 2001"
+}
+
+###
+PUT {{API_URL}}/authors/2
+Content-Type: application/json
+
+{
+"name": "Karin Slaughter",
+"bio": "Karin Slaughter is an American crime writer. She has written 24 novels, which have sold more than 40 million copies and have been published in 120 countries. Her first novel, Blindsighted, was published in 27 languages and made the Crime Writers' Association's Dagger Award shortlist for 'Best Thriller Debut' of 2001"
+}
+###
+GET {{API_URL}}/books HTTP/1.1
+
+###
+POST {{API_URL}}/books HTTP/1.1
+Content-Type: application/json
+
+{
+"title": "The Great Gatsby",
+"author_id": 1,
+"genre_id": 1,
+"published_year": 1925,
+"isbn": "9780684801520",
+"description": "The Great Gatsby is narrated by Nick Carraway, a Yale University graduate from the Midwest who moves to New York after World War I to pursue a career in bonds. He recounts the events of the summer he spent in the East two years later, reconstructing his story through a series of flashbacks not always told in chronological order."
+}

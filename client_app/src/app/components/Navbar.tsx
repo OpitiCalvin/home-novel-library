@@ -7,7 +7,9 @@ import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import {
   faArrowAltCircleDown,
   faBars,
+  faBook,
   faCirclePlus,
+  faFaceSmile,
   faFileAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -54,10 +56,10 @@ function Navbar(props: Props): ReactElement {
           }
           id="example-navbar-warning"
         >
-          <ul className="flex flex-col lg:flex-row list-none mr-auto">
+          <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
             <li className="flex items-center">
               <Link
-                href="/library"
+                href="/books"
                 className={
                   (props.transparent
                     ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
@@ -66,7 +68,7 @@ function Navbar(props: Props): ReactElement {
                 }
               >
                 <FontAwesomeIcon
-                  icon={faFileAlt}
+                  icon={faBook}
                   className={
                     (props.transparent
                       ? "lg:text-gray-300 text-gray-500"
@@ -97,8 +99,49 @@ function Navbar(props: Props): ReactElement {
                 Add a Book
               </Link>
             </li>
-          </ul>
-          <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+            {/* Sub Menu here */}
+            <li className="flex items-center">
+              <Link
+                className={
+                  (props.transparent
+                    ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                    : "text-gray-800 hover:text-gray-600") +
+                  " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                }
+                href="/authors"
+              >
+                <FontAwesomeIcon
+                  icon={faFaceSmile}
+                  className={
+                    (props.transparent
+                      ? "lg:text-gray-300 text-gray-500"
+                      : "text-gray-500") + " text-lg leading-lg mr-2"
+                  }
+                />{" "}
+                Authors
+              </Link>
+            </li>
+            <li className="flex items-center">
+              <Link
+                className={
+                  (props.transparent
+                    ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                    : "text-gray-800 hover:text-gray-600") +
+                  " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                }
+                href="/genres"
+              >
+                <FontAwesomeIcon
+                  icon={faFileAlt}
+                  className={
+                    (props.transparent
+                      ? "lg:text-gray-300 text-gray-500"
+                      : "text-gray-500") + " text-lg leading-lg mr-2"
+                  }
+                />{" "}
+                Genres
+              </Link>
+            </li>
             <li className="flex items-center">
               <Link
                 className={

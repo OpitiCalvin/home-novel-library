@@ -1,5 +1,4 @@
 const Author = require("../models/Author");
-const Genre = require("../models/Genre");
 
 // get all authors
 exports.getAuthors = (req, res, next) => {
@@ -11,7 +10,7 @@ exports.getAuthors = (req, res, next) => {
 };
 
 exports.getAuthor = (req, res, next) => {
-  const authorId = req.params.genreId;
+  const authorId = req.params.id;
   Author.findByPk(authorId)
     .then((author) => {
       if (!author) {
@@ -23,13 +22,12 @@ exports.getAuthor = (req, res, next) => {
 };
 
 exports.createAuthor = (req, res, next) => {
-  const {name, bio} = req.body;
+  const { name, bio } = req.body;
   Author.create({
     name: name,
-    bio: bio
+    bio: bio,
   })
     .then((result) => {
-      console.log("Author created.");
       res
         .status(201)
         .json({ message: "Author created successfully.", author: result });
@@ -39,11 +37,7 @@ exports.createAuthor = (req, res, next) => {
 
 exports.updateAuthor = (req, res, next) => {
   const authorId = req.params.id;
-  const {name, bio} = req.body;
-  // const updatedBio = req.body?.bio;
-
-  console.log("name", name);
-  console.log("bio", bio);
+  const { name, bio } = req.body;
 
   Author.findByPk(authorId)
     .then((author) => {
@@ -61,13 +55,13 @@ exports.updateAuthor = (req, res, next) => {
 };
 
 exports.deleteAuthor = (req, res, next) => {
-  const authorId = req.params.authorId;
+  const authorId = req.params.id;
   Author.findByPk(authorId)
     .then((author) => {
       if (!author) {
         res.status(404).json("Author not found!");
       }
-      return Genre.destroy({
+      return Author.destroy({
         where: {
           id: authorId,
         },

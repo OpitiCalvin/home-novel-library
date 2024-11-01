@@ -1,8 +1,11 @@
+const { title } = require("process");
 const Book = require("../models/Book");
+const { uploadImage } = require("./book_image");
+const path = require("path");
 
 // get all books
 exports.getBooks = (req, res, next) => {
-  Book.findAll({ include: ["genre", "author"] })
+  Book.findAll({ include: ["author"] })
     .then((books) => {
       res.status(200).json({ books: books });
     })
@@ -10,8 +13,8 @@ exports.getBooks = (req, res, next) => {
 };
 
 exports.getBook = (req, res, next) => {
-  const bookId = req.params.bookId;
-  Book.findByPk(bookId)
+  const bookId = req.params.id;
+  Book.findByPk(bookId, {include: ["author"]})
     .then((book) => {
       if (!book) {
         return res.status(404).json({ message: "Book not found!" });
@@ -21,37 +24,38 @@ exports.getBook = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.createBook = (req, res, next) => {
+exports.createBook = async (req, res, next) => {
   Book.create({
     title: req.body.title,
-    author_id: req.body.author_id,
-    genre_id: req.body.genre_id,
-    published_year: req.body.published_year,
+    publishedYear: req.body.publishedYear,
     isbn: req.body.isbn,
+    availabilityStatus: req.body.availabilityStatus,
+    readStatus: req.body.readStatus,
     description: req.body.description,
-    availability_status: req.body.availability_status,
-    read_status: req.body.eead_status,
+    authorId: req.body.authorId,
   })
     .then((result) => {
-      console.log("Book created.");
       res
         .status(201)
         .json({ message: "Book created successfully.", book: result });
     })
     .catch((err) => console.log(err));
+  // res.status(201).json({ message: "Book created successfully.", book: {} });
 };
 
 exports.updateBook = (req, res, next) => {
-  const bookId = req.params.bookId;
+  const bookId = req.params.id;
   // TODO: Handle this better
-  const updatedTitle = req.body.title;
-  const updatedAuthorId = req.body.authorId;
-  const updatedGenreId = req.body.genreId;
-  const updatedPublishedYear = req.body.publishedYear;
-  const updatedISBN = req.body.isbn;
-  const updatedDescription = req.body.description;
-  const updatedAvailabilityStatus = req.body.availabilityStatus;
-  const updatedReadStatus = req.body.ReadStatus;
+  const {
+    title,
+    authorId,
+    genreId,
+    publishedYear,
+    isbn,
+    description,
+    availabilityStatus,
+    readStatus,
+  } = req.body;
 
   Book.findByPk(bookId)
     .then((book) => {
@@ -59,14 +63,14 @@ exports.updateBook = (req, res, next) => {
         return res.status(404).json({ message: "Book not found" });
       }
       // TODO: handle better
-      book.title = updatedTitle;
-      book.author_id = updatedAuthorId;
-      book.genre_id = updatedGenreId;
-      book.published_year = updatedPublishedYear;
-      book.isbn = updatedISBN;
-      book.description = updatedDescription;
-      book.availability_status = updatedAvailabilityStatus;
-      book.read_status = updatedReadStatus;
+      book.title = title;
+      book.author_id = authorId;
+      book.genre_id = genreId;
+      book.published_year = publishedYear;
+      book.isbn = isbn;
+      book.description = description;
+      book.availability_status = availabilityStatus;
+      book.read_status = readStatus;
       return book.save();
     })
     .then((result) => {
@@ -76,7 +80,7 @@ exports.updateBook = (req, res, next) => {
 };
 
 exports.deleteBook = (req, res, next) => {
-  const bookId = req.params.bookId;
+  const bookId = req.params.id;
   Book.findByPk(bookId)
     .then((book) => {
       if (!book) {

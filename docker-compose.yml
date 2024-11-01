@@ -9,7 +9,7 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - ./client_app/.env_local
+      - ./client_app/.env.local
     volumes:
       - ./client_app:/app
       - /app/node_modules

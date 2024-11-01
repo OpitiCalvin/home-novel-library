@@ -1,28 +1,33 @@
 "use server"
 
 import { ZodError } from "zod";
-import { bookFormSchema } from "../formValidators/addBookValidation";
+import { authorFormSchema } from "../formValidators/addAuthorValidation";
 import { State } from "../formValidators/formStates";
 import { apiURI } from "@/api/apiFetcher";
-import { headers } from "next/headers";
 
-export async function processAddBook(prevState: State | null, data: FormData): Promise<State> {
+interface AuthorResponse {
+    message: string;
+    author: {
+        id: number;
+        name: string;
+        bio: string;
+        updatedAt: string; 
+        createdAt: string;
+    }
+}
+export async function processAddAuthor(prevState: State | null, data: FormData): Promise<State> {
     try {
         // validate data
-        const obj = bookFormSchema.parse(data);
-    
-        console.log("server action", data)
-        console.log("parsed data", obj)
+        const obj = authorFormSchema.parse(data)
 
-        const resp = await apiURI.post("books", data).then(res => res.data)
+        const resp: AuthorResponse = await apiURI.post("authors", obj).then(res => res.data)
         return {
             status: "success",
             message: resp.message
         }
-    
+        
     } catch (e) {
-        // In case of a ZodError (caused by our validation) we're adding issues to our response
-        if (e instanceof ZodError) {
+        if (e instanceof ZodError){
             return {
                 status: "error",
                 message: "Invalid form data",

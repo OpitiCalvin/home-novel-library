@@ -6,13 +6,11 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Book } from "../utils/schemas";
 
 type Props = {
-  index: number;
   book: Book
 }
-const BookCard: FunctionComponent<Props> = ({index, book}) => {
+const BookCard: FunctionComponent<Props> = ({book}) => {
   return (
     <div
-      key={index}
       className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700"
     >
       <a href="#">
@@ -32,7 +30,8 @@ const BookCard: FunctionComponent<Props> = ({index, book}) => {
         </a>
         <p className="text-lg text-gray-600">{book.author.name}</p>
         <p className="text-sm text-gray-500">
-          {book.genre.name}, {book.published_year}
+          {/* {book.genre.name},  */}
+          {book.publishedYear}
         </p>
         <hr className="my-2" />
         <Link

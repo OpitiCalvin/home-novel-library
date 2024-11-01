@@ -1,33 +1,35 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { useForm, UseFormRegister } from "react-hook-form";
+import React, { useEffect, useActionState } from "react";
+import {
+  useForm,
+  UseFormRegister,
+  FieldErrors,
+  FieldPath,
+} from "react-hook-form";
+import { State } from "../formValidators/formStates";
 import { processAddBook } from "../actions/addBook";
-import { useFormState, useFormStatus } from "react-dom";
-import { State } from "swr";
+import { bookFormSchema } from "../formValidators/addBookValidation";
+import { useFormStatus } from "react-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchema } from "../utils/addBookValidation";
 import { ErrorMessage } from "@hookform/error-message";
+import { GenreSelect } from "./genreSelect";
+import { AuthorSelect } from "./AuthorSelect";
+import { NewBook } from "../utils/schemas";
 
-export interface FormValues {
-  title: string;
-  author: string;
-  genre: string;
-  year: number;
-  isbn: string;
-  description: string;
-  availability_status: string;
-  read_status: string
-}
+const inputClasses =
+  "px-4 py-2 block border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 border-gray-400 w-full";
+const buttonClasses =
+  "w-full rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 disabled:bg-gray-400 disabled:text-gray-300 disabled:cursor-not-allowed";
 
 export function FormContent({
   register,
   isValid,
   errors,
 }: {
-  register: UseFormRegister<FormValues>;
+  register: UseFormRegister<NewBook>;
   isValid: boolean;
-  errors: FieldErrors<FormValues>;
+  errors: FieldErrors<NewBook>;
 }) {
   const { pending } = useFormStatus();
 
@@ -40,42 +42,26 @@ export function FormContent({
           placeholder="Book Title"
           type="text"
           name="title"
-          className="w-full px-4 py-2 border rounded-md"
+          className={inputClasses}
         />
-        <ErrorMessage name="title" errors={errors} />
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="title" errors={errors} />
+        </span>
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Author</label>
-        <input
-          {...register("author")}
-          type="text"
-          name="author"
-          placeholder="Author Full Name"
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <ErrorMessage name="author" errors={errors} />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Genre</label>
-        <input
-          {...register("genre")}
-          type="text"
-          name="genre"
-          placeholder="Genre"
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <ErrorMessage name="genre" errors={errors} />
-      </div>
+      <AuthorSelect register={register} errors={errors} />
+      {/* <GenreSelect register={register} errors={errors} /> */}
       <div className="mb-4">
         <label className="block text-gray-700">Year</label>
         <input
-          {...register("year")}
+          {...register("publishedYear")}
           type="number"
-          name="year"
+          name="publishedYear"
           placeholder="Publication Year"
-          className="w-full px-4 py-2 border rounded-md"
+          className={inputClasses}
         />
-        <ErrorMessage name="year" errors={errors} />
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="publishedYear" errors={errors} />
+        </span>
       </div>
       <div className="mb-4">
         <label className="block text-gray-700">ISBN</label>
@@ -84,31 +70,41 @@ export function FormContent({
           type="text"
           name="isbn"
           placeholder="ISBN"
-          className="w-full px-4 py-2 border rounded-md"
+          className={inputClasses}
         />
-        <ErrorMessage name="isbn" errors={errors} />
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="isbn" errors={errors} />
+        </span>
       </div>
       <div className="mb-4">
         <label className="block text-gray-700">Availability Status</label>
-        <input
-          {...register("availability_status")}
-          type="text"
-          name="availability_status"
-          placeholder="Availability Status"
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <ErrorMessage name="availability_status" errors={errors} />
+        <select
+          {...register("availabilityStatus")}
+          name="availabilityStatus"
+          className={inputClasses}
+        >
+          <option value="Available">Available</option>
+          <option value="Loaned Out">Loaned Out</option>
+        </select>
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="availabilityStatus" errors={errors} />
+        </span>
       </div>
       <div className="mb-4">
         <label className="block text-gray-700">Read Status</label>
-        <input
-          {...register("read_status")}
-          type="text"
-          name="read_status"
-          placeholder="Read Status"
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <ErrorMessage name="read_status" errors={errors} />
+        <select
+          {...register("readStatus")}
+          name="readStatus"
+          className={inputClasses}
+        >
+          <option value="Not Started">Not Started</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Finished">Finished</option>
+          <option value="Stopped">Stopped</option>
+        </select>
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="readStatus" errors={errors} />
+        </span>
       </div>
       <div className="mb-4">
         <label className="block text-gray-700">Description</label>
@@ -117,26 +113,50 @@ export function FormContent({
           name="description"
           rows={5}
           placeholder="Description"
-          className="w-full px-4 py-2 border rounded-md"
+          className={inputClasses}
         />
-        <ErrorMessage name="description" errors={errors} />
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="description" errors={errors} />
+        </span>
       </div>
-      <input
+      {/* image section */}
+      {/* <div>
+        <label className="block text-gray-700">Cover Image </label>
+        <input
+          {...register("coverImage")}
+          accept="image/*"
+          type="file"
+          name="coverImage"
+          capture="environment"
+          className={inputClasses}
+        />
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="coverImage" errors={errors} />
+        </span>
+      </div> */}
+      <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition"
+        className={buttonClasses}
         disabled={pending || !isValid}
-      />
+      >
+        Submit
+      </button>
       {pending && <span>Loading...</span>}
     </>
   );
 }
 
 export function BookForm() {
-    const { register, formState: {isValid, errors}, setError } = useForm<FormValues>({
-      mode: "all",
-      resolver: zodResolver(formSchema)
-    });
-  const [state, formAction] = useFormState<State, FormData>(
+  const {
+    register,
+    formState: { isValid, errors },
+    setError,
+    reset,
+  } = useForm<NewBook>({
+    mode: "all",
+    resolver: zodResolver(bookFormSchema),
+  });
+  const [state, formAction] = useActionState<State, FormData>(
     processAddBook,
     null
   );
@@ -148,28 +168,28 @@ export function BookForm() {
     // in case our form action returns `error` we can now `setError`s
     if (state.status === "error") {
       state.errors?.forEach((error) => {
-        setError(error.path as FieldPath<FormValues>, {
-          message: error.message
+        setError(error.path as FieldPath<NewBook>, {
+          message: error.message,
         });
       });
     }
     if (state.status === "success") {
       alert(state.message);
+      reset();
     }
-  }, [state, setError]);
+  }, [state, setError, reset]);
 
   return (
-    <>
+    <section className="grid place-items-center py-8 px-4">
       <h1 className="text-center text-4xl font-bold text-gray-800 mb-8">
         Add New Book
       </h1>
-      {state && JSON.stringify(state)}
       <form
         className="bg-white p-6 rounded-md shadow-md w-full max-w-md"
         action={formAction}
       >
         <FormContent register={register} isValid={isValid} errors={errors} />
       </form>
-    </>
+    </section>
   );
 }

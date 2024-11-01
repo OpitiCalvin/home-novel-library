@@ -5,21 +5,22 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Author } from "../utils/schemas";
 
 type Props = {
-  index: number;
   author: Author;
 };
-const AuthorCard: FunctionComponent<Props> = ({ index, author }) => {
+
+const AuthorCard: FunctionComponent<Props> = ({ author }) => {
   return (
-    <div key={index} className="bg-white shadow-md rounded-md p-4 text-center">
+    <div className="bg-white shadow-md rounded-md p-4 text-center">
       <h2 className="text-2xl font-semibold text-gray-800">{author.name}</h2>
-      {/* <p className="text-lg text-gray-600">{author.bio}</p>
-            <p className="text-sm text-gray-500">
-              {author.genre.name}, {author.published_year}
-            </p> */}
+      <p className="text-sm text-gray-500">{author.bio}</p>
       <hr className="my-2" />
       <div>
-        <Link href={`/authors/${author.id}`}>
-          View Info & Books <FontAwesomeIcon icon={faArrowRight} />
+        <Link
+          href={`/authors/${author.id}`}
+          className="text-white bg-gray-400 hover:bg-blue-400 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700"
+        >
+          View Info & Books{" "}
+          <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
         </Link>
       </div>
     </div>

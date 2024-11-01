@@ -5,6 +5,10 @@ export type Author = {
   createdAt: string;
   updatedAt: string;
 };
+export interface NewAuthor {
+  name: string;
+  bio: string;
+};
 export type Genre = {
   id: number;
   name: string;
@@ -12,18 +16,34 @@ export type Genre = {
   updatedAt: string;
 };
 
+export interface NewGenre {
+  name: string;
+};
+
 export type Book = {
   id: number;
   title: string;
-  author_id: number;
-  genre_id: number;
-  published_year: number;
+  authorId: number;
+  publishedYear: number;
   isbn: string;
   description: string;
-  availability_status: string;
-  read_status: string;
+  availabilityStatus: string;
+  readStatus: string;
   createdAt: string;
   updatedAt: string;
-  genre: Genre;
   author: Author;
+  // genre: Genre;
+};
+
+export interface NewBook {
+  title: string;
+  authorId: number;
+  publishedYear: number;
+  isbn: string;
+  description: string;
+  availabilityStatus: string;
+  readStatus: string;
+  author: Author;
+  // genre: Genre;
+  // genreId: number;
 };

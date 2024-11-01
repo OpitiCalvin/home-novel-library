@@ -1,18 +1,17 @@
-import React from 'react';
-import { Book } from '../utils/schemas';
-import BookCard from './BookCard';
+import React from "react";
+import { Book } from "../utils/schemas";
+import BookCard from "./BookCard";
+import { getAllBooks } from "@/api/books";
 
 const BookPreview = async () => {
-  let data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books`);
-  let apiBooks = await data.json();
-  const books: Book[] = apiBooks["books"];
+  const books: Book[] = await getAllBooks();
   return (
-    <div className="max-w-2xl mx-auto">      
-      {books.map((book, index) => (
-        <BookCard index={index} book={book} />
+    <>
+      {books.length > 0 && books.map((book) => (
+        <BookCard key={book.id} book={book} />
       ))}
-    </div>
+    </>
   );
-}
+};
 
-export default BookPreview
+export default BookPreview;

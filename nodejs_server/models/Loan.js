@@ -1,30 +1,29 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require(".");
 
-const Loan = sequelize.define("Loan", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true,
+const Loan = sequelize.define(
+  "loan",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
+    loanDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    dueDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    return_date: DataTypes.DATE,
   },
-  user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  book_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  loan_date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  due_date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  return_date: DataTypes.DATE,
-});
+  {
+    modelName: "loans",
+    underscored: true,
+  }
+);
 
 module.exports = Loan;

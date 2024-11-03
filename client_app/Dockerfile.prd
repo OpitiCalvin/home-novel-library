@@ -1,7 +1,7 @@
-FROM node:lts-slim as base
+FROM node:lts-slim AS base
 
 # Build stage
-FROM base as build
+FROM base AS build
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build
 
 # Runtime Stage
-FROM base as runtime
+FROM base AS runtime
 
 RUN addgroup --system --gid 1001 nextjs
 RUN adduser --system --uid 1001 nextjs

@@ -1,0 +1,41 @@
+@API_URL = http://192.168.0.69:5173/api
+
+##
+
+GET {{API_URL}}/genres HTTP/1.1
+
+###
+POST {{API_URL}}/genres HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Romance"
+}
+
+###
+
+GET {{API_URL}}/authors HTTP/1.1
+
+###
+POST {{API_URL}}/authors HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Karin Slaughter",
+"bio": "Karin Slaughter is an American crime writer. She has written 24 novels, which have sold more than 40 million copies and have been published in 120 countries. Her first novel, Blindsighted, was published in 27 languages and made the Crime Writers' Association's Dagger Award shortlist for 'Best Thriller Debut' of 2001"
+}
+
+###
+GET {{API_URL}}/books HTTP/1.1
+
+###
+POST {{API_URL}}/books HTTP/1.1
+Content-Type: application/json
+
+{
+"title": "Blindsighted",
+"authorId": 1,
+"publishedYear": 2001,
+"isbn": "0-7126-9410-2",
+"description": "The sleepy town of Heartsdale, Georgia, is jolted into panic when Sara Linton, paediatrician and medical examiner, finds Sibyl Adams, a young college professor, dead in the local diner. As well as being viciously raped, Sibyl has been cut: two deep knife wounds form a lethal cross over her stomach. But it's only once Sara starts to perform the post-mortem that the full extent of the killer's brutality becomes clear."
+}

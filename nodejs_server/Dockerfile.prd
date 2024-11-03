@@ -1,0 +1,32 @@
+FROM node:lts-slim as base
+
+# build stage
+FROM base  as build
+
+WORKDIR /app
+
+COPY package*.json .
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+# runtime stage
+FROM base as final
+
+RUN mkdir -p /home/node/app/dist && chown -r node:node /home/node/app
+
+WORKDIR /home/node/app
+
+COPY package*.json .
+
+USER node
+
+# install only production dependencies
+RUN npm i --only=production
+
+COPY --chown=node:node --from=build /app/dist ./dist
+
+EXPOSE 3000
+
+ENTRYPOINT [ "node", "./dist/server.js" ]

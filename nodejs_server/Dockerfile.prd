@@ -1,7 +1,7 @@
-FROM node:lts-slim as base
+FROM node:lts-slim AS base
 
 # build stage
-FROM base  as build
+FROM base  AS build
 
 WORKDIR /app
 
@@ -12,9 +12,9 @@ COPY . .
 RUN npm run build
 
 # runtime stage
-FROM base as final
+FROM base AS final
 
-RUN mkdir -p /home/node/app/dist && chown -r node:node /home/node/app
+RUN mkdir -p /home/node/app/dist && chown -R node:node /home/node/app
 
 WORKDIR /home/node/app
 

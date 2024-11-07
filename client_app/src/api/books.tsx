@@ -1,14 +1,12 @@
-import { NewBook } from "@/app/utils/schemas";
-
 export async function getAllBooks() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books`, {
     next: { revalidate: 180 },
   });
-  let apiBooks = await res.json();
+  const apiBooks = await res.json();
   return apiBooks["books"];
 }
 
-export async function getOneBook(bookId: Number) {
+export async function getOneBook(bookId: number) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/books/${bookId}`,
     {

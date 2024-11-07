@@ -6,7 +6,7 @@ module.exports = {
     main: "./server.js",
   },
   output: {
-    path: path.join(__dirname, "prd_build"),
+    path: path.join(__dirname, "dist"),
     publicPath: "/",
     filename: "[name].js",
     clean: true,

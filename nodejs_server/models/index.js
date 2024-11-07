@@ -1,6 +1,6 @@
 const dbConfig = require("../config/db.config");
 const { Sequelize } = require("sequelize");
-import pg from "pg";
+const pg = require("pg");
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,

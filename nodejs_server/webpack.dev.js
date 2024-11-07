@@ -5,7 +5,7 @@ module.exports = {
     main: "./server.js",
   },
   output: {
-    path: path.join(__dirname, "dev_build"),
+    path: path.join(__dirname, "dist"),
     publicPath: "/",
     filename: "[name].js",
     clean: true,

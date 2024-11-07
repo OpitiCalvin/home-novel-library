@@ -6,9 +6,11 @@ FROM base AS build
 WORKDIR /app
 
 COPY package*.json .
+
 RUN npm ci
 
 COPY . .
+
 RUN npm run build
 
 # Runtime Stage
@@ -21,7 +23,7 @@ USER nextjs
 
 WORKDIR /app
 
-COPY --from=build /app/public ./public
+# COPY --from=build /app/public ./public
 
 RUN mkdir .next
 
@@ -30,4 +32,4 @@ COPY --from=build --chown=nextjs /app/.next/static ./.next/static
 
 ENV NODE_ENV=production
 
-CMD [ "node","server.js" ]
+CMD [ "node",".next/standalone/server.js" ]

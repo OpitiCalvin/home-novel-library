@@ -4,22 +4,22 @@ services:
   app:
     build:
       context: ./client_app
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prd
     container_name: novellib_ui
     ports:
       - "3001:3000"
     env_file:
-      - ./client_app/.env.prd
+      - ./client_app/.env.local
     volumes:
       - ./client_app:/app
 
-    depends_on:
-      - api
+    # depends_on:
+    #   - api
 
   api:
     build:
       context: ./nodejs_server
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prd
     container_name: novellib_api
     ports:
       - "5173:3000"

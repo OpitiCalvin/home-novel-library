@@ -11,7 +11,7 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run build
+RUN npm run build:prd
 
 # runtime stage
 FROM base AS final
@@ -23,7 +23,7 @@ WORKDIR /home/node/app
 COPY package*.json .
 
 # install only production dependencies
-RUN npm i --only=production
+RUN npm install --only=production
 
 COPY --chown=node:node --from=build /app/dist ./dist
 
@@ -31,4 +31,4 @@ USER node
 
 EXPOSE 3000
 
-ENTRYPOINT [ "node", "./dist/server.js" ]
+ENTRYPOINT [ "node", "./dist/main.js" ]

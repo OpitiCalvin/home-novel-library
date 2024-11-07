@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: novellib_ui
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env.local
+    volumes:
+      - .:/app
+      - /app/node_modules

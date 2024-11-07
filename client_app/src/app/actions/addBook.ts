@@ -4,7 +4,6 @@ import { ZodError } from "zod";
 import { bookFormSchema } from "../formValidators/addBookValidation";
 import { State } from "../formValidators/formStates";
 import { apiURI } from "@/api/apiFetcher";
-import { headers } from "next/headers";
 
 export async function processAddBook(prevState: State | null, data: FormData): Promise<State> {
     try {

@@ -5,12 +5,11 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Genre } from "../utils/schemas";
 
 type Props = {
-  index: number;
-  genre: Genre;
+  genre: Genre
 };
-const GenreCard: FunctionComponent<Props> = ({ index, genre }) => {
+const GenreCard: FunctionComponent<Props> = ({ genre }) => {
   return (
-    <div key={index} className="bg-white shadow-md rounded-md p-4 text-center">
+    <div className="bg-white shadow-md rounded-md p-4 text-center">
       <h2 className="text-2xl font-semibold text-gray-800">{genre.name}</h2>
       <hr className="my-2" />
       <div>

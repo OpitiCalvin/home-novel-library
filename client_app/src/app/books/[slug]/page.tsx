@@ -6,11 +6,8 @@ import { useParams } from "next/navigation";
 import useSWR from "swr";
 import { fetcher } from "@/api/apiFetcher";
 import Image from "next/image";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const page: React.FC = () => {
+const Page: React.FC = () => {
   const params = useParams();
   const bookId = params?.slug;
 
@@ -52,4 +49,4 @@ const page: React.FC = () => {
   }
 };
 
-export default page;
+export default Page;

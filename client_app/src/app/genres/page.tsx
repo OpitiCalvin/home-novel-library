@@ -4,8 +4,8 @@ import GenreCard from "../components/GenreCard";
 import Link from "next/link";
 
 const GenreList: React.FC = async () => {
-  let data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/genres`);
-  let response = await data.json();
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/genres`);
+  const response = await data.json();
   const genres: Genre[] = response["genres"];
 
   return (
@@ -15,7 +15,7 @@ const GenreList: React.FC = async () => {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-4xl">
         {genres.map((genre, index) => (
-          <GenreCard index={index} genre={genre} />
+          <GenreCard key={index} genre={genre} />
         ))}
       </div>
       {/* <hr className="my-2" /> */}

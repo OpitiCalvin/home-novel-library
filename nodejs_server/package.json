@@ -4,7 +4,12 @@
   "description": "A backend server application for library management build with Node JS and Express",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server.js",
+    "start:dev": "node ./dev_build/main.js",
+    "build": "webpack --config webpack.config.js --mode production",
+    "build:dev": "webpack --config webpack.dev.js --mode development",
+    "build:prd": "webpack --config webpack.prd.js --mode production"
   },
   "keywords": [
     "nodejs",
@@ -21,8 +26,15 @@
     "express": "^4.21.1",
     "express-fileforge": "^1.8.3",
     "jsonwebtoken": "^9.0.2",
-    "pg": "^8.13.0",
+    "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "babel-loader": "^9.2.1",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
   }
 }

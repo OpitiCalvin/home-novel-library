@@ -6,9 +6,11 @@ FROM base  AS build
 WORKDIR /app
 
 COPY package*.json .
+
 RUN npm ci
 
 COPY . .
+
 RUN npm run build
 
 # runtime stage
@@ -20,12 +22,12 @@ WORKDIR /home/node/app
 
 COPY package*.json .
 
-USER node
-
 # install only production dependencies
 RUN npm i --only=production
 
 COPY --chown=node:node --from=build /app/dist ./dist
+
+USER node
 
 EXPOSE 3000
 

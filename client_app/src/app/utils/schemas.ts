@@ -4,6 +4,7 @@ export type Author = {
   bio: string;
   createdAt: string;
   updatedAt: string;
+  books: Book[]
 };
 export interface NewAuthor {
   name: string;

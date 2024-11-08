@@ -5,9 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server.js",
-    "start:dev": "node ./dev_build/main.js",
-    "build": "webpack --config webpack.config.js --mode production",
+    "dev": "nodemon --env-file=.env.dev ./server.js",
+    "start": "node ./dist/main.js",
     "build:dev": "webpack --config webpack.dev.js --mode development",
     "build:prd": "webpack --config webpack.prd.js --mode production"
   },

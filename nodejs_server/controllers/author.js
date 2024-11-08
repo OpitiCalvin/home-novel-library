@@ -1,4 +1,5 @@
 const Author = require("../models/Author");
+const Book = require("../models/Book");
 
 // get all authors
 exports.getAuthors = (req, res, next) => {
@@ -11,7 +12,12 @@ exports.getAuthors = (req, res, next) => {
 
 exports.getAuthor = (req, res, next) => {
   const authorId = req.params.id;
-  Author.findByPk(authorId)
+  Author.findByPk(authorId, {
+    include: {
+      model: Book,
+      attributes: { exclude: ["authorId", "id", "createdAt", "updatedAt"] },
+    },
+  })
     .then((author) => {
       if (!author) {
         return res.status(404).json({ message: "Author not found!" });

@@ -1,5 +1,5 @@
 import React from "react";
-import { Author, NewBook } from "../utils/schemas";
+import { IAuthorResponse, IBook } from "../utils/schemas";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { fetcher } from "@/api/apiFetcher";
@@ -12,8 +12,8 @@ export function AuthorSelect({
   register,
   errors,
 }: {
-  register: UseFormRegister<NewBook>;
-  errors: FieldErrors<NewBook>;
+  register: UseFormRegister<IBook>;
+  errors: FieldErrors<IBook>;
 }) {
   const { data, error, isLoading } = useSWR("authors", fetcher);
 
@@ -24,7 +24,7 @@ export function AuthorSelect({
   }
 
   if (data) {
-    const authors: Author[] = data["authors"];
+    const authors: IAuthorResponse[] = data["authors"];
     return (
       <div className="mb-4">
         <label className="block text-gray-700">Author</label>
@@ -33,7 +33,7 @@ export function AuthorSelect({
           name="authorId"
           className={inputClasses}
         >
-          <option value="0">New Author</option>
+          <option value="">Select an Author</option>
           {authors.map((author, index) => (
             <option key={index} value={author.id}>
               {author.name}

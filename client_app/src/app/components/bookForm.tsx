@@ -14,7 +14,7 @@ import { useFormStatus } from "react-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "@hookform/error-message";
 import { AuthorSelect } from "./AuthorSelect";
-import { NewBook } from "../utils/schemas";
+import { IBook } from "../utils/schemas";
 // import { GenreSelect } from "./genreSelect";
 
 const inputClasses =
@@ -27,9 +27,9 @@ export function FormContent({
   isValid,
   errors,
 }: {
-  register: UseFormRegister<NewBook>;
+  register: UseFormRegister<IBook>;
   isValid: boolean;
-  errors: FieldErrors<NewBook>;
+  errors: FieldErrors<IBook>;
 }) {
   const { pending } = useFormStatus();
 
@@ -152,7 +152,7 @@ export function BookForm() {
     formState: { isValid, errors },
     setError,
     reset,
-  } = useForm<NewBook>({
+  } = useForm<IBook>({
     mode: "all",
     resolver: zodResolver(bookFormSchema),
   });
@@ -168,7 +168,7 @@ export function BookForm() {
     // in case our form action returns `error` we can now `setError`s
     if (state.status === "error") {
       state.errors?.forEach((error) => {
-        setError(error.path as FieldPath<NewBook>, {
+        setError(error.path as FieldPath<IBook>, {
           message: error.message,
         });
       });

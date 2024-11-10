@@ -1,11 +1,11 @@
 import React from "react";
-import { Genre } from "../utils/schemas";
+import { IGenreResponse } from "../utils/schemas";
 import GenreCard from "../components/GenreCard";
 import Link from "next/link";
 import { getAllGenres } from "@/api/genres";
 
 const GenreList: React.FC = async () => {
-  const genres: Genre[] = await getAllGenres()
+  const genres: IGenreResponse[] = await getAllGenres();
 
   return (
     <section className="grid place-items-center text-center py-8 px-4">

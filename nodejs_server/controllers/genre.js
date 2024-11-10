@@ -2,7 +2,11 @@ const Genre = require("../models/Genre");
 
 // get all genres
 exports.getGenres = (req, res, next) => {
-  Genre.findAll()
+  Genre.findAll({
+    attributes: {
+      exclude: ["createdAt", "updatedAt"]
+    }
+  })
     .then((genres) => {
       res.status(200).json({ genres: genres });
     })
@@ -12,7 +16,11 @@ exports.getGenres = (req, res, next) => {
 // get a single genre
 exports.getGenre = (req, res, next) => {
   const genreId = req.params.id;
-  Genre.findByPk(genreId)
+  Genre.findByPk(genreId, {
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  })
     .then((genre) => {
       if (!genre) {
         return res.status(404).json({ message: "Genre not found!" });

@@ -20,12 +20,12 @@ export async function processAddGenre(prevState: State | null, data: FormData): 
         // validate data
         const obj = genreFormSchema.parse(data);
 
-        const resp: GenreResponse = await apiURI.post("genres",obj).then((res) => res.data
+        const { message } = await apiURI.post("genres",obj).then((res) => res.data
         )
         // console.log("resp", resp);
         return {
             status: "success",
-            message: resp.message
+            message: message
         }
 
     } catch (e) {

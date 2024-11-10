@@ -48,7 +48,7 @@ export interface IBook {
   // genreId: number;
 };
 
-export interface IBookImage {
-  bookId: number;
-  coverImages: any;
-}
+// export interface IBookImage {
+//   bookId: number;
+//   coverImages: any;
+// }

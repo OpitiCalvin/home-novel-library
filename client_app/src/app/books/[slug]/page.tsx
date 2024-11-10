@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Book } from "@/app/utils/schemas";
+import { IBookResponse } from "@/app/utils/schemas";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 import { fetcher } from "@/api/apiFetcher";
@@ -15,7 +15,7 @@ const Page: React.FC = () => {
   if (isLoading) return <div> Loading...</div>
   if (error) return <div>Failed to load.</div>
   if (data) {
-    const book:Book = data["book"];
+    const book: IBookResponse = data["book"];
     
     return (
       <section className="grid place-items-center">

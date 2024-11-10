@@ -1,5 +1,5 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { IBookImage, IBookResponse } from "../utils/schemas";
+import { IBookResponse } from "../utils/schemas";
 import useSWR from "swr";
 import { fetcher } from "@/api/apiFetcher";
 import { ErrorMessage } from "@hookform/error-message";

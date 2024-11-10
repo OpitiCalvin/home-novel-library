@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Book } from "../utils/schemas";
+import { IBookResponse } from "../utils/schemas";
 
 type Props = {
-  book: Book
-}
+  book: IBookResponse;
+};
 const BookCard: FunctionComponent<Props> = ({book}) => {
   return (
     <div

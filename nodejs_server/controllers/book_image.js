@@ -24,20 +24,28 @@ exports.getImage = (req, res, next) => {
 };
 
 exports.createBookImage = (req, res, next) => {
-  const { filename, filepath, mimetype, size } = req.body;
-  BookImage.create({
-    filename: filename,
-    filepath: filepath,
-    mimetype: mimetype,
-    size: size,
-  })
-    .then((result) => {
-      res.status(201).json({
-        message: "Book Image created successfully.",
-        bookImage: result,
-      });
-    })
-    .catch((err) => console.log(err));
+  const { bookId } = req.body;
+  const {files} = req;
+  console.log("req body - book Id", bookId);
+  console.log("req file", files);
+  // BookImage.create({
+  //   filename: filename,
+  //   filepath: filepath,
+  //   mimetype: mimetype,
+  //   size: size,
+  // })
+  //   .then((result) => {
+  //     res.status(201).json({
+  //       message: "Book Image created successfully.",
+  //       bookImage: result,
+  //     });
+  //   })
+  //   .catch((err) => console.log(err));
+
+  res.status(201).json({
+    message: "Book image created successfully",
+    bookImage: {},
+  });
 };
 
 exports.updateBookImage = (req, res, next) => {

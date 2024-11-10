@@ -1,11 +1,11 @@
 import React from "react";
-import { Author } from "../utils/schemas";
+import { IAuthorResponse } from "../utils/schemas";
 import AuthorCard from "../components/AuthorCard";
 import { getAllAuthors } from "@/api/authors";
 import Link from "next/link";
 
 const AuthorList: React.FC = async () => {
-  const authors: Author[] = await getAllAuthors();
+  const authors: IAuthorResponse[] = await getAllAuthors();
   return (
     <section className="grid place-items-center text-center py-8 px-4">
       <h1 className="text-4xl font-bold text-gray-800 mb-8">List of Authors</h1>

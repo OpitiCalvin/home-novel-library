@@ -2,10 +2,21 @@ const { title } = require("process");
 const Book = require("../models/Book");
 const { uploadImage } = require("./book_image");
 const path = require("path");
+const Author = require("../models/Author");
 
 // get all books
 exports.getBooks = (req, res, next) => {
-  Book.findAll({ include: ["author"] })
+  Book.findAll({
+    include: {
+      model: Author,
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    },
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  })
     .then((books) => {
       res.status(200).json({ books: books });
     })
@@ -14,7 +25,17 @@ exports.getBooks = (req, res, next) => {
 
 exports.getBook = (req, res, next) => {
   const bookId = req.params.id;
-  Book.findByPk(bookId, {include: ["author"]})
+  Book.findByPk(bookId, {
+    include: {
+      model: Author,
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    },
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  })
     .then((book) => {
       if (!book) {
         return res.status(404).json({ message: "Book not found!" });

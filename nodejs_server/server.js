@@ -6,6 +6,9 @@ const authorRoutes = require("./routes/authors");
 const genreRoutes = require("./routes/genres");
 const bookRoutes = require("./routes/books");
 const loanRoutes = require("./routes/loans");
+const bookImagesRoutes = require("./routes/bookImages")
+
+const PORT = process.env.APP_PORT || 3000;
 
 const app = express();
 
@@ -29,6 +32,7 @@ app.use("/api/authors", authorRoutes);
 app.use("/api/genres", genreRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/loans", loanRoutes);
+app.use("/api/book-uploads", bookImagesRoutes);
 
 // error handling
 app.use((error, req, res, next) => {
@@ -48,6 +52,6 @@ sequelize
     console.log(`Failed to sync db on ${process.env.DB_HOST}:  ${err.message}`);
   });
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

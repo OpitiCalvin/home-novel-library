@@ -1,8 +1,13 @@
 const Author = require("../models/Author");
+const Book = require("../models/Book");
 
 // get all authors
 exports.getAuthors = (req, res, next) => {
-  Author.findAll()
+  Author.findAll({
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  })
     .then((authors) => {
       res.status(200).json({ authors: authors });
     })
@@ -11,7 +16,31 @@ exports.getAuthors = (req, res, next) => {
 
 exports.getAuthor = (req, res, next) => {
   const authorId = req.params.id;
-  Author.findByPk(authorId)
+  Author.findByPk(authorId, {
+    attributes: {
+      exclude: ["createdAt", "updatedAt"]
+    }
+  })
+    .then((author) => {
+      if (!author) {
+        return res.status(404).json({ message: "Author not found!" });
+      }
+      res.status(200).json({ author: author });
+    })
+    .catch((err) => console.log(err));
+};
+// Get author and associated publications
+exports.getAuthorAndBooks = (req, res, next) => {
+  const authorId = req.params.id;
+  Author.findByPk(authorId, {
+    include: {
+      model: Book,
+      attributes: { exclude: ["authorId", "id", "createdAt", "updatedAt"] },
+    },
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  })
     .then((author) => {
       if (!author) {
         return res.status(404).json({ message: "Author not found!" });

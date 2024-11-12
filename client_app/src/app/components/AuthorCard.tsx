@@ -2,10 +2,10 @@ import React, { FunctionComponent } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Author } from "../utils/schemas";
+import { IAuthorResponse } from "../utils/schemas";
 
 type Props = {
-  author: Author;
+  author: IAuthorResponse;
 };
 
 const AuthorCard: FunctionComponent<Props> = ({ author }) => {

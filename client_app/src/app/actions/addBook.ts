@@ -13,10 +13,10 @@ export async function processAddBook(prevState: State | null, data: FormData): P
         console.log("server action", data)
         console.log("parsed data", obj)
 
-        const resp = await apiURI.post("books", data).then(res => res.data)
+        const { message } = await apiURI.post("books", data).then(res => res.data)
         return {
             status: "success",
-            message: resp.message
+            message: message
         }
     
     } catch (e) {

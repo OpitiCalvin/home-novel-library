@@ -6,7 +6,7 @@ import {
   useForm,
   UseFormRegister,
 } from "react-hook-form";
-import { NewAuthor } from "../utils/schemas";
+import { IAuthor } from "../utils/schemas";
 import { useFormStatus } from "react-dom";
 import { ErrorMessage } from "@hookform/error-message";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,9 +25,9 @@ export function FormContent({
   isValid,
   errors,
 }: {
-  register: UseFormRegister<NewAuthor>;
+  register: UseFormRegister<IAuthor>;
   isValid: boolean;
-  errors: FieldErrors<NewAuthor>;
+  errors: FieldErrors<IAuthor>;
 }) {
   const { pending } = useFormStatus();
 
@@ -78,7 +78,7 @@ export function AuthorForm() {
     formState: { isValid, errors },
     setError,
     reset,
-  } = useForm<NewAuthor>({
+  } = useForm<IAuthor>({
     mode: "all",
     resolver: zodResolver(authorFormSchema),
   });
@@ -94,7 +94,7 @@ export function AuthorForm() {
     if (state.status === "error") {
       console.log(state.errors);
       state.errors?.forEach((error) => {
-        setError(error.path as FieldPath<NewAuthor>, {
+        setError(error.path as FieldPath<IAuthor>, {
           message: error.message,
         });
       });

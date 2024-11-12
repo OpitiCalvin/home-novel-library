@@ -1,26 +1,28 @@
-export type Author = {
+export interface IAuthorAndBooksResponse {
   id: number;
   name: string;
   bio: string;
-  createdAt: string;
-  updatedAt: string;
+  books: IBook[]
 };
-export interface NewAuthor {
+export interface IAuthor {
   name: string;
   bio: string;
 };
-export type Genre = {
+export interface IAuthorResponse {
   id: number;
   name: string;
-  createdAt: string;
-  updatedAt: string;
+  bio: string;
 };
-
-export interface NewGenre {
+export interface IGenreResponse {
+  id: number;
   name: string;
 };
 
-export type Book = {
+export interface IGenre {
+  name: string;
+};
+
+export interface IBookResponse {
   id: number;
   title: string;
   authorId: number;
@@ -29,13 +31,11 @@ export type Book = {
   description: string;
   availabilityStatus: string;
   readStatus: string;
-  createdAt: string;
-  updatedAt: string;
-  author: Author;
-  // genre: Genre;
+  author: IAuthor;
+  // genre: IGenre;
 };
 
-export interface NewBook {
+export interface IBook {
   title: string;
   authorId: number;
   publishedYear: number;
@@ -43,7 +43,12 @@ export interface NewBook {
   description: string;
   availabilityStatus: string;
   readStatus: string;
-  author: Author;
-  // genre: Genre;
+  // author: IAuthor;
+  // genre: IGenre;
   // genreId: number;
 };
+
+// export interface IBookImage {
+//   bookId: number;
+//   coverImages: any;
+// }

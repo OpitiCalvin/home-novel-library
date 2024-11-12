@@ -6,7 +6,7 @@ import {
   useForm,
   UseFormRegister,
 } from "react-hook-form";
-import { NewGenre } from "../utils/schemas";
+import { IGenre } from "../utils/schemas";
 import { useFormStatus } from "react-dom";
 import { ErrorMessage } from "@hookform/error-message";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,9 +20,9 @@ function FormContent({
   isValid,
   errors,
 }: {
-  register: UseFormRegister<NewGenre>;
+  register: UseFormRegister<IGenre>;
   isValid: boolean;
-  errors: FieldErrors<NewGenre>;
+  errors: FieldErrors<IGenre>;
 }) {
   const { pending } = useFormStatus();
 
@@ -59,7 +59,7 @@ export function GenreForm() {
     formState: { isValid, errors },
     setError,
     reset,
-  } = useForm<NewGenre>({
+  } = useForm<IGenre>({
     mode: "all",
     resolver: zodResolver(genreFormSchema),
   });
@@ -75,7 +75,7 @@ export function GenreForm() {
     if (state.status === "error") {
       console.log(state.errors);
       state.errors?.forEach((error) => {
-        setError(error.path as FieldPath<NewGenre>, {
+        setError(error.path as FieldPath<IGenre>, {
           message: error.message,
         });
       });

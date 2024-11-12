@@ -5,27 +5,17 @@ import { genreFormSchema } from "../formValidators/addGenreValidation";
 import { State } from "../formValidators/formStates";
 import { apiURI } from "@/api/apiFetcher";
 
-interface GenreResponse {
-    message: string; 
-    genre: {
-        id: number;
-        name: string; 
-        updatedAt: string; 
-        createdAt: string;
-    }
-}
-
 export async function processAddGenre(prevState: State | null, data: FormData): Promise<State> {
     try {
         // validate data
         const obj = genreFormSchema.parse(data);
 
-        const resp: GenreResponse = await apiURI.post("genres",obj).then((res) => res.data
+        const { message } = await apiURI.post("genres",obj).then((res) => res.data
         )
         // console.log("resp", resp);
         return {
             status: "success",
-            message: resp.message
+            message: message
         }
 
     } catch (e) {

@@ -1,12 +1,11 @@
 import React from "react";
-import { Genre } from "../utils/schemas";
+import { IGenreResponse } from "../utils/schemas";
 import GenreCard from "../components/GenreCard";
 import Link from "next/link";
+import { getAllGenres } from "@/api/genres";
 
 const GenreList: React.FC = async () => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/genres`);
-  const response = await data.json();
-  const genres: Genre[] = response["genres"];
+  const genres: IGenreResponse[] = await getAllGenres();
 
   return (
     <section className="grid place-items-center text-center py-8 px-4">
@@ -14,7 +13,7 @@ const GenreList: React.FC = async () => {
         List of Genres
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-4xl">
-        {genres.map((genre, index) => (
+        {genres?.map((genre, index) => (
           <GenreCard key={index} genre={genre} />
         ))}
       </div>

@@ -10,4 +10,4 @@ services:
     env_file:
       - ./.env.prd
     volumes:
-      - ./uploads:/home/node/app/uploads
+      - ./public:/home/node/app/public

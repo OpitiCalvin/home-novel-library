@@ -26,7 +26,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
+// app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/public", express.static("public"));
 
 // test route
 app.get("/", (req, res, next) => {

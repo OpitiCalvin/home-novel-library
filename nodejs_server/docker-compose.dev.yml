@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile.dev
     container_name: novellib_api
     ports:
-      - "5173:3000"
+      - "3080:3080"
     env_file:
       - ./.env.dev
+    volumes:
+      - ./public:/home/node/app/public

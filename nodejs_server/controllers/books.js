@@ -1,18 +1,26 @@
 const { title } = require("process");
 const Book = require("../models/Book");
-const { uploadImage } = require("./book_image");
 const path = require("path");
 const Author = require("../models/Author");
+const BookImage = require("../models/BookImage");
 
 // get all books
 exports.getBooks = (req, res, next) => {
   Book.findAll({
-    include: {
-      model: Author,
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
+    include: [
+      {
+        model: Author,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       },
-    },
+      {
+        model: BookImage,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    ],
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
@@ -26,12 +34,20 @@ exports.getBooks = (req, res, next) => {
 exports.getBook = (req, res, next) => {
   const bookId = req.params.id;
   Book.findByPk(bookId, {
-    include: {
-      model: Author,
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
+    include: [
+      {
+        model: Author,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       },
-    },
+      {
+        model: BookImage,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    ],
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },

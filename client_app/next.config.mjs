@@ -4,11 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "flowbite.com",
+        hostname: "*.opititechgeolabs.com",
       },
     ],
   },
-  output: "standalone"
+  output: "standalone",
 };
 
 export default nextConfig;

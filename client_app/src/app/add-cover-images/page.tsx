@@ -54,13 +54,12 @@ const Page: React.FunctionComponent = () => {
 
   const onSubmit: SubmitHandler<BookImageFormValues> = async (data) => {
     try {
-      console.log("data", data);
       const formData = new FormData();
       formData.append("bookId", data.bookId.toString());
       selectedFiles.forEach((file) => formData.append("files", file));
 
       const resp = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/book-uploads`,
+        `${process.env.NEXT_PUBLIC_API_URL}/book-images`,
         {
           method: "POST",
           body: formData,
@@ -69,7 +68,8 @@ const Page: React.FunctionComponent = () => {
       if (!resp.ok) {
         throw new Error("Upload failed!");
       }
-      const { message } = await resp.json();
+      const { message, bookImage } = await resp.json();
+      console.log("book Image resp", bookImage)
       if (message) {
         alert(message);
         reset();
@@ -77,12 +77,13 @@ const Page: React.FunctionComponent = () => {
       }
     } catch (error) {
       console.log("Failed to submit form", error);
+      alert(error);
     }
   };
   return (
     <section className="grid place-items-center py-8 px-4">
       <h1 className="text-center text-4xl font-bold text-gray-800 mb-8">
-        Add Book Image(s)
+        Add Book Cover Image(s)
       </h1>
       <form
         className="bg-white p-6 rounded-md shadow-md w-full max-w-md"
@@ -113,28 +114,29 @@ const Page: React.FunctionComponent = () => {
             />
             <label
               htmlFor="fileInput"
-              className="px-4 text-white bg-indigo-600 rounded-md shadow-sm cursor-pointer hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500"
+              className="px-4 py-2 text-white font-semibold w-full h-11 bg-indigo-400 rounded-md shadow-sm cursor-pointer hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500"
             >
               Choose Files
             </label>
           </div>
-          {selectedFiles.length >0 && (
-          <div className="mt-2 space-y-2">
-            {selectedFiles.map((file, index) => (
-            <div key={index} className="flex items-center">
+          {selectedFiles.length > 0 && (
+            <div className="mt-2 space-y-2">
               <p className="text-sm text-gray-700">
-                Selected File:
-                <span className="block font-semibold">{file.name}</span>
-              </p>
-              <button
-                type="button"
-                onClick={() => removeSelectedFile(file)}
-                className="ml-2 text-red-500 hover:text-red-700"
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </button>
-            </div>
-            ))}
+                Selected Files:</p>
+              {selectedFiles.map((file, index) => (
+                <div key={index} className="flex items-center">
+                  <p className="text-sm text-gray-700">
+                    <span className="mx-4 block font-semibold">{file.name}</span>
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => removeSelectedFile(file)}
+                    className="ml-2 text-red-500 hover:text-red-700"
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </div>
+              ))}
             </div>
           )}
           <span className="text-red-500 font-semibold text-sm">
@@ -149,7 +151,7 @@ const Page: React.FunctionComponent = () => {
           // disabled={isSubmitting}
         >
           {/* Submit */}
-          {isSubmitting? "Submitting...": "Submit"}
+          {isSubmitting ? "Submitting..." : "Submit"}
         </button>
         {pending && <span>Loading...</span>}
       </form>

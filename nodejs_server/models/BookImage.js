@@ -26,6 +26,10 @@ const BookImage = sequelize.define(
       type: DataTypes.BIGINT,
       allowNull: false,
     },
+    encoding: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     bookId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -36,6 +40,5 @@ const BookImage = sequelize.define(
     underscored: true,
   }
 );
-
 
 module.exports = BookImage;

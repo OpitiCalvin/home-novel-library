@@ -32,6 +32,7 @@ export interface IBookResponse {
   availabilityStatus: string;
   readStatus: string;
   author: IAuthor;
+  bookImages:IBookImageResponse[]
   // genre: IGenre;
 };
 
@@ -48,7 +49,12 @@ export interface IBook {
   // genreId: number;
 };
 
-// export interface IBookImage {
-//   bookId: number;
-//   coverImages: any;
-// }
+export interface IBookImageResponse {
+  id: number;
+  filename: string;
+  filepath: string;
+  mimetype: string;
+  size: string;
+  encoding: string;
+  bookId: number;
+}

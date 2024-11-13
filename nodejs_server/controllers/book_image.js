@@ -96,8 +96,8 @@ exports.deleteBookImage = (req, res, next) => {
         res.status(404).json("Book image not found!");
       }
       // use bookImage.filename to delete from uploads directory
-      const uploadDir = path.join(__dirname, "uploads");
-      const filePath = path.join(uploadDir, bookImage.filename);
+      // const uploadDir = path.join(__dirname, "uploads");
+      const filePath = path.join(uploadDir, bookImage.filepath);
       // check if file exists
       fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {

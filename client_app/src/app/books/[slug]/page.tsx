@@ -38,7 +38,7 @@ const Page: React.FC = () => {
             <a href="#">
               <Image
                 className="rounded-t-lg"
-                src="/unavailableCoverImage2.jpeg"
+                src="/unavailableCoverImage.jpeg"
                 alt="Placeholder Image"
                 height="0"
                 width={382}

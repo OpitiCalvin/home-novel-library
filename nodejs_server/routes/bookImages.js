@@ -5,7 +5,7 @@ const path = require("path");
 
 const multer = require("multer");
 const upload = multer({
-  dest: "./uploads",
+  dest: "./public/uploads",
   limits: { fileSize: 5000000 },
   fileFilter: (req, files, cb) => {
     checkFileType(files, cb);

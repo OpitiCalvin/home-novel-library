@@ -68,8 +68,7 @@ const Page: React.FunctionComponent = () => {
       if (!resp.ok) {
         throw new Error("Upload failed!");
       }
-      const { message, bookImage } = await resp.json();
-      console.log("book Image resp", bookImage)
+      const { message } = await resp.json();
       if (message) {
         alert(message);
         reset();

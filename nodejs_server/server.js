@@ -1,16 +1,21 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const sequelize = require("./models");
+const path = require("path");
+const cors = require('cors')
+
 const userRoutes = require("./routes/users");
 const authorRoutes = require("./routes/authors");
 const genreRoutes = require("./routes/genres");
 const bookRoutes = require("./routes/books");
 const loanRoutes = require("./routes/loans");
-const bookImagesRoutes = require("./routes/bookImages")
+const bookImagesRoutes = require("./routes/bookImages");
 
 const PORT = process.env.APP_PORT || 3000;
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -20,6 +25,8 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   next();
 });
+
+app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
 
 // test route
 app.get("/", (req, res, next) => {
@@ -32,7 +39,7 @@ app.use("/api/authors", authorRoutes);
 app.use("/api/genres", genreRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/loans", loanRoutes);
-app.use("/api/book-uploads", bookImagesRoutes);
+app.use("/api/book-images", bookImagesRoutes);
 
 // error handling
 app.use((error, req, res, next) => {

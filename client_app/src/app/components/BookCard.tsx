@@ -3,25 +3,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { IBookResponse } from "../utils/schemas";
+import { IBookImageResponse, IBookResponse } from "../utils/schemas";
+// import placeholderImage from 'public/u'
 
 type Props = {
   book: IBookResponse;
 };
 const BookCard: FunctionComponent<Props> = ({book}) => {
+  const bookImages: IBookImageResponse[] = book['bookImages'];
+  const randBookId: number =
+    bookImages.length > 1 ? Math.floor(Math.random() * bookImages.length) : 0;
   return (
-    <div
-      className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700"
-    >
-      <a href="#">
-        <Image
-          className="rounded-t-lg"
-          src="https://flowbite.com/docs/images/blog/image-1.jpg"
-          alt=""
-          width={200}
-          height={200}
-        />
-      </a>
+    <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
+      {bookImages.length >= 1 ? (
+        <a href={`/books/${book.id}`}>
+          <Image
+            className="rounded-t-lg"
+            src={`${process.env.NEXT_PUBLIC_API_URL}/${bookImages[randBookId].filepath}`}
+            alt="Image of the novel"
+            height="0"
+            width={382}
+            // className="w-auto h-auto"
+          />
+        </a>
+      ) : (
+        <a href={`/books/${book.id}`}>
+          <Image
+            className="rounded-t-lg"
+            src="/unavailableCoverImage2.jpeg"
+            alt="Placeholder Image"
+            height="0"
+            width={382}
+            // className="w-auto h-auto"
+          />
+        </a>
+      )}
       <div className="p-5">
         <a href="#">
           <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">

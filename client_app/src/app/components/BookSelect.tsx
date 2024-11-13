@@ -3,7 +3,7 @@ import { IBookResponse } from "../utils/schemas";
 import useSWR from "swr";
 import { fetcher } from "@/api/apiFetcher";
 import { ErrorMessage } from "@hookform/error-message";
-import { BookImageFormValues } from "../uploads/page";
+import { BookImageFormValues } from "../add-cover-images/page";
 
 export function BookSelect({
   register,

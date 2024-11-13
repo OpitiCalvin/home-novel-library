@@ -132,3 +132,5 @@ dist
 .pnp.*
 dev_build/
 prd_build/
+
+uploads/

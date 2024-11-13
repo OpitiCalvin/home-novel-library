@@ -9,3 +9,5 @@ services:
       - "5173:3000"
     env_file:
       - ./.env.prd
+    volumes:
+      - ./uploads:/home/node/app/uploads

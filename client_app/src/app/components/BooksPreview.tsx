@@ -3,7 +3,7 @@ import { IBookResponse } from "../utils/schemas";
 import BookCard from "./BookCard";
 import { getAllBooks } from "@/api/books";
 
-const BookPreview = async () => {
+const BooksPreview = async () => {
   const books: IBookResponse[] = await getAllBooks();
   return (
     <>
@@ -14,4 +14,4 @@ const BookPreview = async () => {
   );
 };
 
-export default BookPreview;
+export default BooksPreview;

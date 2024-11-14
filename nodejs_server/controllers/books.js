@@ -1,6 +1,4 @@
-const { title } = require("process");
 const Book = require("../models/Book");
-const path = require("path");
 const Author = require("../models/Author");
 const BookImage = require("../models/BookImage");
 
@@ -10,12 +8,6 @@ exports.getBooks = (req, res, next) => {
     include: [
       {
         model: Author,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-      },
-      {
-        model: BookImage,
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
@@ -41,12 +33,6 @@ exports.getBook = (req, res, next) => {
           exclude: ["createdAt", "updatedAt"],
         },
       },
-      {
-        model: BookImage,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-      },
     ],
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -59,6 +45,25 @@ exports.getBook = (req, res, next) => {
       res.status(200).json({ book: book });
     })
     .catch((err) => console.log(err));
+};
+
+exports.getBookImages = async (req, res) => {
+  const bookId = req.params.id;
+  const book = await Book.findByPk(bookId)
+  if (!book) {
+    return res
+      .status(404)
+      .json({ message: `Book not found with id ${bookId}` });
+  }
+  const bookImages = await BookImage.findAll({
+    where: {
+      bookId: bookId,
+    },
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  });
+  res.status(200).json({ images: bookImages });
 };
 
 exports.createBook = async (req, res, next) => {

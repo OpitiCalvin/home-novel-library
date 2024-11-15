@@ -17,8 +17,6 @@ import { processAddGenre } from "../actions/addGenre";
 
 const inputClasses =
   "px-4 py-2 block border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 border-gray-400 w-full";
-const buttonClasses =
-  "w-full rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 disabled:bg-gray-400 disabled:text-gray-300 disabled:cursor-not-allowed";
 
 function FormContent({
   register,

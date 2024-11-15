@@ -1,13 +1,11 @@
 "use client";
 
 import React from "react";
-import { IBookImageResponse, IBookResponse } from "@/utils/schemas";
+import { IBookResponse } from "@/utils/schemas";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 import { fetcher } from "@/api/apiFetcher";
-import Image from "next/image";
 import BookCard from "@/components/BookCard";
-import ImageSlider from "@/components/ImageSlider";
 import BookImageSlider from "@/components/BookImageSlider";
 
 const Page: React.FC = () => {

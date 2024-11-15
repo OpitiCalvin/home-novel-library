@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthorForm } from "@/app/components/authorForm";
+import { AuthorForm } from "@/components/authorForm";
 
 const AddAuthor = () => {
   return (

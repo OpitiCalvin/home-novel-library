@@ -10,10 +10,10 @@ export async function processAddBook(prevState: State | null, data: FormData): P
         // validate data
         const obj = bookFormSchema.parse(data);
     
-        console.log("server action", data)
-        console.log("parsed data", obj)
+        // console.log("server action", data)
+        // console.log("parsed data", obj)
 
-        const { message } = await apiURI.post("books", data).then(res => res.data)
+        const { message } = await apiURI.post("books", obj).then(res => res.data)
         return {
             status: "success",
             message: message

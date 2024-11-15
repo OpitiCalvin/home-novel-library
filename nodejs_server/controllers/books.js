@@ -1,8 +1,8 @@
-const { title } = require("process");
 const Book = require("../models/Book");
-const path = require("path");
 const Author = require("../models/Author");
 const BookImage = require("../models/BookImage");
+const Genre = require("../models/Genre");
+const Book_Genre = require("../models/BookGenre");
 
 // get all books
 exports.getBooks = (req, res, next) => {
@@ -10,12 +10,6 @@ exports.getBooks = (req, res, next) => {
     include: [
       {
         model: Author,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-      },
-      {
-        model: BookImage,
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
@@ -41,12 +35,6 @@ exports.getBook = (req, res, next) => {
           exclude: ["createdAt", "updatedAt"],
         },
       },
-      {
-        model: BookImage,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-      },
     ],
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -61,28 +49,74 @@ exports.getBook = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
+exports.getBookImages = async (req, res) => {
+  const bookId = req.params.id;
+  const book = await Book.findByPk(bookId);
+  if (!book) {
+    return res
+      .status(404)
+      .json({ message: `Book not found with id ${bookId}` });
+  }
+  const bookImages = await BookImage.findAll({
+    where: {
+      bookId: bookId,
+    },
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  });
+  res.status(200).json({ images: bookImages });
+};
+
 exports.createBook = async (req, res, next) => {
-  Book.create({
-    title: req.body.title,
-    publishedYear: req.body.publishedYear,
-    isbn: req.body.isbn,
-    availabilityStatus: req.body.availabilityStatus,
-    readStatus: req.body.readStatus,
-    description: req.body.description,
-    authorId: req.body.authorId,
-  })
-    .then((result) => {
-      res
-        .status(201)
-        .json({ message: "Book created successfully.", book: result });
-    })
-    .catch((err) => console.log(err));
-  // res.status(201).json({ message: "Book created successfully.", book: {} });
+  const {
+    title,
+    publishedYear,
+    isbn,
+    availabilityStatus,
+    readStatus,
+    description,
+    authorId,
+    genres,
+  } = req.body;
+
+  let bookGenres;
+  try {
+    const book = await Book.create({
+      title: title,
+      publishedYear: publishedYear,
+      isbn: isbn,
+      availabilityStatus: availabilityStatus,
+      readStatus: readStatus,
+      description: description,
+      authorId: authorId,
+    });
+
+  if(genres !== undefined) {
+    bookGenres = await Genre.findAll({ where: { id: genres } });
+  }
+
+    if (bookGenres.length > 0) {
+      book.addGenres(bookGenres).then((result) => {
+        res.status(201).json({
+          message: "Book created successfully.",
+          book: book,
+          genres: bookGenres,
+        });
+      }).catch(e => console.log(e));
+    } else {
+      res.status(201).json({
+        message: "Book created successfully.",
+        book: book,
+      });
+    }
+  } catch (error){
+    console.log(error);
+  }
 };
 
 exports.updateBook = (req, res, next) => {
   const bookId = req.params.id;
-  // TODO: Handle this better
   const {
     title,
     authorId,
@@ -99,7 +133,6 @@ exports.updateBook = (req, res, next) => {
       if (!book) {
         return res.status(404).json({ message: "Book not found" });
       }
-      // TODO: handle better
       book.title = title;
       book.author_id = authorId;
       book.genre_id = genreId;

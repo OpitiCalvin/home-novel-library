@@ -1,15 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  useForm,
-  SubmitHandler,
-} from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "@hookform/error-message";
-import { bookImageFormSchema } from "../formValidators/bookImageValidation";
+import { bookImageFormSchema } from "../../formValidators/bookImageValidation";
 import { useFormStatus } from "react-dom";
-import { BookSelect } from "../components/BookSelect";
+import { BookSelect } from "../../components/BookSelect";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
@@ -39,10 +36,9 @@ const Page: React.FunctionComponent = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     const imageFiles = files.filter((file) => file.type.startsWith("image/"));
-    
+
     setSelectedFiles((prevFiles) => [...prevFiles, ...imageFiles]);
     setValue("coverImages", [...selectedFiles, ...imageFiles]); // Sync with react-hook-form
-    
   };
 
   const removeSelectedFile = (fileToRemove: File) => {
@@ -120,12 +116,13 @@ const Page: React.FunctionComponent = () => {
           </div>
           {selectedFiles.length > 0 && (
             <div className="mt-2 space-y-2">
-              <p className="text-sm text-gray-700">
-                Selected Files:</p>
+              <p className="text-sm text-gray-700">Selected Files:</p>
               {selectedFiles.map((file, index) => (
                 <div key={index} className="flex items-center">
                   <p className="text-sm text-gray-700">
-                    <span className="mx-4 block font-semibold">{file.name}</span>
+                    <span className="mx-4 block font-semibold">
+                      {file.name}
+                    </span>
                   </p>
                   <button
                     type="button"

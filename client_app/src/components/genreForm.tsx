@@ -15,6 +15,9 @@ import { useActionState, useEffect } from "react";
 import { State } from "../formValidators/formStates";
 import { processAddGenre } from "../actions/addGenre";
 
+const inputClasses =
+  "px-4 py-2 block border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 border-gray-400 w-full";
+
 function FormContent({
   register,
   isValid,
@@ -39,6 +42,32 @@ function FormContent({
         />
         <span className="text-red-500 font-semibold text-sm">
           <ErrorMessage name="name" errors={errors} />
+        </span>
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700">Category</label>
+        <input
+          {...register("category")}
+          placeholder="Category"
+          type="text"
+          name="category"
+          className={inputClasses}
+        />
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="category" errors={errors} />
+        </span>
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700">Description</label>
+        <textarea
+          {...register("description")}
+          name="description"
+          rows={10}
+          placeholder="Description"
+          className={inputClasses}
+        />
+        <span className="text-red-500 font-semibold text-sm">
+          <ErrorMessage name="description" errors={errors} />
         </span>
       </div>
       <button

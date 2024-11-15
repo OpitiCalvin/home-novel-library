@@ -10,6 +10,9 @@ router.get("/", controller.getBooks);
 // get a specific book
 router.get("/:id", controller.getBook);
 
+// get a specific book's associated cover images
+router.get("/:id/images", controller.getBookImages);
+
 // create a new book
 router.post("/", controller.createBook);
 

@@ -2,7 +2,7 @@ export interface IAuthorAndBooksResponse {
   id: number;
   name: string;
   bio: string;
-  books: IBook[]
+  books: IBookResponse[]
 };
 export interface IAuthor {
   name: string;
@@ -12,40 +12,64 @@ export interface IAuthorResponse {
   id: number;
   name: string;
   bio: string;
+  books:IBookResponse[]
 };
 export interface IGenreResponse {
   id: number;
   name: string;
+  category: string;
+  description: string;
+};
+export interface IGenreAndBooksResponse {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  books: IBookResponse[]
 };
 
 export interface IGenre {
   name: string;
+  category: string;
+  description: string;
 };
 
 export interface IBookResponse {
   id: number;
   title: string;
-  authorId: number;
   publishedYear: number;
   isbn: string;
   description: string;
   availabilityStatus: string;
   readStatus: string;
+  authorId: number;
+  author?: IAuthor;
+};
+
+export interface IBookAndAuthorResponse {
+  id: number;
+  title: string;
+  publishedYear: number;
+  isbn: string;
+  description: string;
+  availabilityStatus: string;
+  readStatus: string;
+  authorId: number;
   author: IAuthor;
-  bookImages:IBookImageResponse[]
+  // bookImages:IBookImageResponse[]
   // genre: IGenre;
 };
 
 export interface IBook {
   title: string;
-  authorId: number;
   publishedYear: number;
   isbn: string;
   description: string;
   availabilityStatus: string;
   readStatus: string;
+  authorId: number;
+  genres: number[];
   // author: IAuthor;
-  // genre: IGenre;
   // genreId: number;
 };
 

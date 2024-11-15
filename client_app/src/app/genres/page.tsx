@@ -1,6 +1,6 @@
 import React from "react";
-import { IGenreResponse } from "../utils/schemas";
-import GenreCard from "../components/GenreCard";
+import { IGenreResponse } from "../../utils/schemas";
+import GenreCard from "../../components/GenreCard";
 import Link from "next/link";
 import { getAllGenres } from "@/api/genres";
 

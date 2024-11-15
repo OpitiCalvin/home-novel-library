@@ -1,5 +1,6 @@
 const Author = require("../models/Author");
 const Book = require("../models/Book");
+const BookImage = require("../models/BookImage");
 
 // get all authors
 exports.getAuthors = (req, res, next) => {
@@ -18,8 +19,8 @@ exports.getAuthor = (req, res, next) => {
   const authorId = req.params.id;
   Author.findByPk(authorId, {
     attributes: {
-      exclude: ["createdAt", "updatedAt"]
-    }
+      exclude: ["createdAt", "updatedAt"],
+    },
   })
     .then((author) => {
       if (!author) {
@@ -35,7 +36,7 @@ exports.getAuthorAndBooks = (req, res, next) => {
   Author.findByPk(authorId, {
     include: {
       model: Book,
-      attributes: { exclude: ["authorId", "id", "createdAt", "updatedAt"] },
+      attributes: { exclude: ["createdAt", "updatedAt"] },
     },
     attributes: {
       exclude: ["createdAt", "updatedAt"],

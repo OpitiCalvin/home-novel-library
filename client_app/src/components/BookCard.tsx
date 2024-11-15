@@ -5,10 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { IBookImageResponse, IBookResponse } from "../utils/schemas";
+import { IBookImageResponse, IBookResponse } from "@/utils/schemas";
 import useSWR from "swr";
 import { fetcher } from "@/api/apiFetcher";
-// import placeholderImage from 'public/u'
 
 type Props = {
   book: IBookResponse;
@@ -54,9 +53,7 @@ const BookCard: FunctionComponent<Props> = ({ book }) => {
             </h5>
           </a>
           <p className="text-lg text-gray-600">{book.author?.name}</p>
-          <p className="text-sm text-gray-500">
-            {book.publishedYear}
-          </p>
+          <p className="text-sm text-gray-500">{book.publishedYear}</p>
           <hr className="my-2" />
           <Link
             href={`/books/${book.id}`}
@@ -67,7 +64,6 @@ const BookCard: FunctionComponent<Props> = ({ book }) => {
         </div>
       </div>
     );
-
   }
 };
 

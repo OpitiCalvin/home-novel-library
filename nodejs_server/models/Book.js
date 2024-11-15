@@ -48,7 +48,7 @@ Book.hasMany(BookImage, {
   },
 });
 BookImage.belongsTo(Book);
-Book.belongsToMany(Genre, { through: "book_genres", timestamps: false });
-Genre.belongsToMany(Book, { through: "book_genres", timestamps: false });
+// Book.belongsToMany(Genre, { through: "book_genres", timestamps: false });
+// Genre.belongsToMany(Book, { through: "book_genres", timestamps: false });
 
 module.exports = Book;

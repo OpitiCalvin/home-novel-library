@@ -1,5 +1,5 @@
 import React from "react";
-import BookPreview from "../components/BooksPreview";
+import BookPreview from "../../components/BooksPreview";
 import Link from "next/link";
 
 const Library: React.FC = async () => {

@@ -1,8 +1,8 @@
 "use client";
 
 import { fetcher } from "@/api/apiFetcher";
-import BookCard from "@/app/components/BookCard";
-import { IAuthorAndBooksResponse } from "@/app/utils/schemas";
+import BookCard from "@/components/BookCard";
+import { IAuthorAndBooksResponse } from "@/utils/schemas";
 import { useParams } from "next/navigation";
 import React from "react";
 import useSWR from "swr";
@@ -11,7 +11,10 @@ const SingleAuthor: React.FC = () => {
   const params = useParams();
   const authorId = params?.slug;
 
-  const { data, error, isLoading } = useSWR(`/authors/${authorId}/books`, fetcher);
+  const { data, error, isLoading } = useSWR(
+    `/authors/${authorId}/books`,
+    fetcher
+  );
   if (isLoading) return <div> Loading...</div>;
   if (error) return <div>Failed to load.</div>;
   if (data) {
@@ -34,7 +37,7 @@ const SingleAuthor: React.FC = () => {
             </h1>
             {/* Author's Published Books */}
             {author.books.map((book, index) => (
-            <BookCard key={index} book={book} />
+              <BookCard key={index} book={book} />
             ))}
           </section>
         )}

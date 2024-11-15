@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { IBookImageResponse } from "../utils/schemas";
 
 type Props = {
-    images: IBookImageResponse[];
+  images: IBookImageResponse[];
 };
 const ImageSlider: FunctionComponent<Props> = ({ images }) => {
   // State to keep track of the current image index

@@ -17,10 +17,21 @@ export interface IAuthorResponse {
 export interface IGenreResponse {
   id: number;
   name: string;
+  category: string;
+  description: string;
+};
+export interface IGenreAndBooksResponse {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  books: IBookResponse[]
 };
 
 export interface IGenre {
   name: string;
+  category: string;
+  description: string;
 };
 
 export interface IBookResponse {
@@ -57,8 +68,8 @@ export interface IBook {
   availabilityStatus: string;
   readStatus: string;
   authorId: number;
+  genres: number[];
   // author: IAuthor;
-  // genre: IGenre;
   // genreId: number;
 };
 

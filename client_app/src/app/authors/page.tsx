@@ -1,6 +1,6 @@
 import React from "react";
-import { IAuthorResponse } from "../utils/schemas";
-import AuthorCard from "../components/AuthorCard";
+import { IAuthorResponse } from "../../utils/schemas";
+import AuthorCard from "../../components/AuthorCard";
 import { getAllAuthors } from "@/api/authors";
 import Link from "next/link";
 

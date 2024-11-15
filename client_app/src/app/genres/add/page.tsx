@@ -1,4 +1,4 @@
-import { GenreForm } from "@/app/components/genreForm";
+import { GenreForm } from "@/components/genreForm";
 import React from "react";
 
 const AddGenre = () => {

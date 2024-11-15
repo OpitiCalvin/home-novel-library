@@ -10,6 +10,9 @@ router.get("/", controller.getGenres);
 // get a specific Genre
 router.get("/:id", controller.getGenre);
 
+// get a specific Genre and associated books
+router.get("/:id/books", controller.getGenreAndBooks);
+
 // create a new Genre
 router.post("/", controller.createGenre);
 

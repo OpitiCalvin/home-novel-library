@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BooksPreview from "./components/BooksPreview";
+import BooksPreview from "../components/BooksPreview";
 
 export default function Home() {
   return (

@@ -53,7 +53,7 @@ export function FormContent({
           {...register("bio")}
           name="bio"
           className="w-full px-4 py-2 border rounded-md"
-          rows={5}
+          rows={10}
         />
         <span className="text-red-500 font-semibold text-sm">
           <ErrorMessage name="bio" errors={errors} />

@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "@hookform/error-message";
 import { AuthorSelect } from "./AuthorSelect";
 import { IBook } from "../utils/schemas";
-// import { GenreSelect } from "./genreSelect";
+import { GenreSelect } from "./genreSelect";
 
 const inputClasses =
   "px-4 py-2 block border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 border-gray-400 w-full";
@@ -49,7 +49,7 @@ export function FormContent({
         </span>
       </div>
       <AuthorSelect register={register} errors={errors} />
-      {/* <GenreSelect register={register} errors={errors} /> */}
+      <GenreSelect register={register} errors={errors} />
       <div className="mb-4">
         <label className="block text-gray-700">Year</label>
         <input
@@ -111,7 +111,7 @@ export function FormContent({
         <textarea
           {...register("description")}
           name="description"
-          rows={5}
+          rows={10}
           placeholder="Description"
           className={inputClasses}
         />
@@ -119,21 +119,6 @@ export function FormContent({
           <ErrorMessage name="description" errors={errors} />
         </span>
       </div>
-      {/* image section */}
-      {/* <div>
-        <label className="block text-gray-700">Cover Image </label>
-        <input
-          {...register("coverImage")}
-          accept="image/*"
-          type="file"
-          name="coverImage"
-          capture="environment"
-          className={inputClasses}
-        />
-        <span className="text-red-500 font-semibold text-sm">
-          <ErrorMessage name="coverImage" errors={errors} />
-        </span>
-      </div> */}
       <button
         type="submit"
         className={buttonClasses}

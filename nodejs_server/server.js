@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const sequelize = require("./models");
-const path = require("path");
-const cors = require('cors')
+const cors = require('cors');
+const cookieParser = require("cookie-parser");
 
 const userRoutes = require("./routes/users");
 const authorRoutes = require("./routes/authors");
@@ -16,6 +16,7 @@ const PORT = process.env.APP_PORT || 3000;
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -26,7 +27,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/public", express.static("public"));
 
 // test route
@@ -35,7 +35,7 @@ app.get("/", (req, res, next) => {
 });
 
 // CRUD routes
-app.use("/api/users", userRoutes);
+app.use("/api/auth", userRoutes);
 app.use("/api/authors", authorRoutes);
 app.use("/api/genres", genreRoutes);
 app.use("/api/books", bookRoutes);

@@ -2,8 +2,8 @@ const express = require("express");
 const bodyparser = require("body-parser");
 const sequelize = require("./models");
 const cors = require("cors");
-const { logger } = require("./logging");
-const morganMiddleware = require("./middleware/morgan_logging");
+const logger = require("./config/logging");
+const morganMiddleware = require("./middleware/requests_logging");
 
 const userRoutes = require("./routes/users");
 const authorRoutes = require("./routes/authors");
@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 
 // error handling
 app.use((error, req, res, next) => {
-  console.log(error);
   logger.error(error);
   const status = error.statusCode || 500;
   const message = error.message;
@@ -56,15 +55,14 @@ app.use("/api/book-images", bookImagesRoutes);
 sequelize
   .sync({ alter: true })
   .then(() => {
-    console.log("Synced db.");
     logger.info("Successfully synchronized db.");
   })
   .catch((err) => {
-    console.log(`Failed to sync db on ${process.env.DB_HOST}:  ${err.message}`);
-    logger.error(`Failed to sync db on ${process.env.DB_HOST} - ${err.message}`);
+    logger.error(
+      `Failed to sync db on ${process.env.DB_HOST} - ${err.message}`
+    );
   });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  logger.info(`Server is running on port ${PORT}`);
+  logger.info(`Server started and is running on port ${PORT}`);
 });

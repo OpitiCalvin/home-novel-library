@@ -10,3 +10,4 @@ services:
       - ./.env.dev
     volumes:
       - ./public:/home/node/app/public
+      - ./logs:/home/node/app/logs

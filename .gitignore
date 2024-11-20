@@ -134,3 +134,4 @@ dev_build/
 prd_build/
 
 uploads/
+private.http

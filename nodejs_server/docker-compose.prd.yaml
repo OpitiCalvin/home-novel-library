@@ -11,3 +11,4 @@ services:
       - ./.env.prd
     volumes:
       - ./public:/home/node/app/public
+      - ./logs:/home/node/app/logs

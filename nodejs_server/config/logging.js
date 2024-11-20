@@ -1,17 +1,27 @@
 const winston = require("winston");
-const { combine, timestamp, json, errors } = winston.format;
+const { combine, timestamp, json, errors, colorize, printf } = winston.format;
 
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || "info",
   format: combine(
     errors({ stack: true }),
     timestamp({
-      format: "YYYY-MM-DD hh:mm:ss.SSS A",
+      format: "YYYY-MM-DD hh:mm:ss A",
     }),
     json()
   ),
   transports: [
-    // new winston.transports.Console(),
+    new winston.transports.Console({
+      format: combine(
+        colorize(),
+        timestamp({
+          format: "YYYY-MM-DD hh:mm:ss A",
+        }),
+        printf(({ level, message, timestamp }) => {
+          return `${timestamp} [${level}]: ${message}`;
+        })
+      ),
+    }),
     new winston.transports.File({
       filename: "./logs/combined.log",
     }),

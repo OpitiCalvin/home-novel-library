@@ -98,7 +98,7 @@ exports.login = async (req, res, next) => {
           });
           res.status(200).json({
             message: "Login successful",
-            user: user._id,
+            user: user.id,
           });
         } else {
           res.status(400).json({ message: "Login not successful" });

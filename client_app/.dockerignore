@@ -1,4 +1,8 @@
 .DS_Store
+.vscide
+.gitignore
+README.md
+
 # Node JS
 **/node_modules/
 **/dist
@@ -30,3 +34,7 @@ coverage.xml
 .mypy_cache
 .pytest_cache
 .hypothesis
+
+# Next JS
+.next
+.dockerignore

@@ -5,7 +5,7 @@ const {auth, adminAuth, userAuth} = require("../middleware/auth");
 const router = express.Router();
 
 // get all users
-router.get("/",  controller.getUsers);
+router.get("/", adminAuth, controller.getUsers);
 
 // get a specific user
 router.get("/:id", controller.getUser);

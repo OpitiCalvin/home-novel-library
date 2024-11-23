@@ -1,0 +1,42 @@
+{
+  "name": "homelib",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "migrate": "npx sequelize-cli db:migrate --config ./src/sequelize/config/db.config.js --debug",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo --config ./src/sequelize/config/db.config.js --debug"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@hookform/error-message": "^2.0.1",
+    "@hookform/resolvers": "^3.9.1",
+    "dotenv": "^16.4.5",
+    "next": "15.0.3",
+    "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.53.2",
+    "sequelize": "^6.37.5",
+    "sequelize-cli": "^6.6.2",
+    "swr": "^2.2.5",
+    "zod": "^3.23.8",
+    "zod-form-data": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

@@ -6,8 +6,7 @@ export const GET = async (
   { params }: { params: { id: number } }
 ) => {
   try {
-    console.log("id param", params.id);
-    const author = Author.findByPk(params.id, {
+    const author = await Author.findByPk(params.id, {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },

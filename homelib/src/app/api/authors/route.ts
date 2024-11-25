@@ -2,7 +2,7 @@
 import Author from "@/database/models/author";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 export const GET = async () => {
   try {

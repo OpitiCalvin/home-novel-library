@@ -22,7 +22,7 @@ export const GET = async () => {
 export const POST = async (req: any) => {
   try {
     const { name, category, description } = await req.json();
-    console.log('genre info - name', name);
+    console.log("genre info - name", name);
     const genre = await Genre.create({
       name: name,
       category: category,

@@ -1,14 +1,13 @@
-// import Author from "@/lib/models/author"
-// import Book from "@/lib/models/book"
-import db from "@/sequelize/models";
+import Author from "@/database/models/author";
+import Book from "@/database/models/book";
 import { NextResponse } from "next/server"
 
 export const GET = async (request: Request,
     { params }: { params: {id:number}}) => {
     try {
-      const author = await db.Author.findByPk(params.id, {
+      const author = await Author.findByPk(params.id, {
     include: {
-      model: db.Book,
+      model: Book,
       attributes: { exclude: ["createdAt", "updatedAt"] },
     },
     attributes: {

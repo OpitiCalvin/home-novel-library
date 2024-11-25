@@ -1,6 +1,5 @@
-// import Author from "@/lib/models/author";
-// import Book from "@/lib/models/book";
-import db from "@/sequelize/models";
+import Book from "@/database/models/book";
+import Author from "@/database/models/author";
 import { NextResponse } from "next/server";
 
 
@@ -8,10 +7,10 @@ export const GET = async (request: Request,
     { params }: { params: {id:number}}
 ) => {
     try {
-        const book = await db.Book.findByPk(params.id, {
+        const book = await Book.findByPk(params.id, {
             include: [
       {
-        model: db.Author,
+        model: Author,
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
@@ -36,7 +35,7 @@ export const GET = async (request: Request,
 
 export const DELETE = async (request: Request, { params }: { params: {id:number}}) => {
     try {
-        const book = await db.Book.findByPk(params.id);
+        const book = await Book.findByPk(params.id);
         if (!book) {
             return NextResponse.json({message: "Book not found!"}, {status: 404});
         }

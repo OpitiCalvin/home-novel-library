@@ -1,14 +1,13 @@
-// import Book from "@/lib/models/book"
-// import Genre from "@/lib/models/genre"
-import db from "@/sequelize/models";
+import Genre from "@/database/models/genre";
+import Book from "@/database/models/book";
 import { NextResponse } from "next/server"
 
 export const GET = async (request: Request,
     { params }: { params: {id:number}}) => {
     try {
-        const genre = db.Genre.findByPk(params.id, {
+        const genre = Genre.findByPk(params.id, {
     include: {
-      model: db.Book,
+      model: Book,
       attributes: {
         exclude: ["createdAt", "updatedAt", "book_genre"],
       },

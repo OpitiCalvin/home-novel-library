@@ -1,12 +1,14 @@
-import db from "@/sequelize/models";
+import Book from "@/database/models/book";
+import Author from "@/database/models/author";
+import Genre from "@/database/models/genre";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
   try {
-    const books = await db.Book.findAll({
+    const books = await Book.findAll({
       include: [
         {
-          model: db.Author,
+          model: Author,
           attributes: {
             exclude: ["createdAt", "updatedAt"],
           },
@@ -41,7 +43,7 @@ export const POST = async (req: any) => {
     console.log(`title- ${title} author id - ${authorId} genres - ${genres}`);
 
     let bookGenres;
-    const book = await db.Book.create({
+    const book = await Book.create({
       title: title,
       publishedYear: publishedYear,
       isbn: isbn,
@@ -52,7 +54,7 @@ export const POST = async (req: any) => {
     });
 
     if (genres !== undefined) {
-      bookGenres = await db.Genre.findAll({ where: { id: genres } });
+      bookGenres = await Genre.findAll({ where: { id: genres } });
     }
     if (bookGenres?.length > 0) {
       bookGenres.addGenres(bookGenres).then(() => {

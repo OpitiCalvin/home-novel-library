@@ -1,17 +1,16 @@
-// import Book from "@/lib/models/book"
-// import BookImage from "@/lib/models/bookImage";
-import db from "@/sequelize/models";
+import Book from "@/database/models/book";
+import BookImage from "@/database/models/bookImage";
 import { NextResponse } from "next/server";
 
 export const GET = async (request: Request,
     { params }: { params: {id:number}}) => {
     try {
-        const book = await db.Book.findByPk(params.id);
+        const book = await Book.findByPk(params.id);
         if (!book) {
     return NextResponse.json({ message: `Book not found with id ${params.id}` },{status: 404});
   }
 
-  const bookImages = await db.BookImage.findAll({
+  const bookImages = await BookImage.findAll({
     where: {
       bookId: params.id,
     },

@@ -1,10 +1,12 @@
-// import Author from "@/sequelize/models/author";
-import db from "@/sequelize/models";
+// import db from "@/database/models";
+import Author from "@/database/models/author";
 import { NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 
 export const GET = async () => {
   try {
-    const authors = await db.Author.findAll({
+    const authors = await Author.findAll({
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
@@ -22,7 +24,7 @@ export const GET = async () => {
 export const POST = async (req: any) => {
   try {
     const { name, bio } = await req.json();
-    const author = await db.Author.create({
+    const author = await Author.create({
       name: name,
       bio: bio,
     });

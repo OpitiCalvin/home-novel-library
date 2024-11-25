@@ -1,5 +1,4 @@
-// import Genre from "@/lib/models/genre";
-import db from "@/sequelize/models";
+import Genre from "@/database/models/genre";
 import { NextResponse } from "next/server";
 
 
@@ -7,7 +6,7 @@ export const GET = async (request: Request,
     { params }: { params: {id:number}}
 ) => {
     try {
-        const genre = await db.Genre.findByPk(params.id, {
+        const genre = await Genre.findByPk(params.id, {
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
@@ -27,7 +26,7 @@ export const GET = async (request: Request,
 
 export const DELETE = async (request: Request, { params }: { params: {id:number}}) => {
     try {
-        const genre = await db.Genre.findByPk(params.id);
+        const genre = await Genre.findByPk(params.id);
         if (!genre) {
             return NextResponse.json({message: "Genre not found!"}, {status: 404});
         }

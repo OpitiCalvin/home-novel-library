@@ -1,6 +1,4 @@
-// import Author from "@/lib/models/author";
-// import Book from "@/lib/models/book";
-import db from "@/sequelize/models";
+import Author from "@/database/models/author";
 import { NextResponse } from "next/server";
 
 export const GET = async (
@@ -9,7 +7,7 @@ export const GET = async (
 ) => {
   try {
     console.log("id param", params.id);
-    const author = db.Author.findByPk(params.id, {
+    const author = Author.findByPk(params.id, {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },

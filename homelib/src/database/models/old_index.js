@@ -2,7 +2,7 @@ const { Sequelize } = require("sequelize");
 // const config = require("../config/config.json")[
 //   process.env.NODE_ENV || "development"
 // ];
-const config = require("../config/db.config");
+const config = require("../config/db.config.mjs");
 import Author from "./author";
 import Genre from "./genre";
 import Book from "./book";
@@ -36,5 +36,6 @@ db.Book = Book(sequelize, Sequelize);
 db.BookGenre = BookGenre(sequelize, Sequelize);
 db.BookImage = BookImage(sequelize, Sequelize);
 
+db.sequelize.sync({ force: true });
 // module.exports = db;
 export default db;

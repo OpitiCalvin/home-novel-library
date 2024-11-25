@@ -10,15 +10,15 @@ const Author = (sequelize, DataTypes) => {
      *   this.hasMany(models.SomeOtherModel, { foreignKey: "genreId" });
      * }
      */
-    static associate(models) {
-      this.hasMany(models.Book, {
-        onDelete: "CASCADE",
-        foreignKey: {
-          name: "author_id",
-          allowNull: false,
-        },
-      });
-    }
+    // static associate(models) {
+    //   Author.hasMany(models.Book, {
+    //     onDelete: "CASCADE",
+    //     foreignKey: {
+    //       // name: "author_id",
+    //       allowNull: false,
+    //     },
+    //   });
+    // }
   }
   Author.init(
     {
@@ -44,6 +44,15 @@ const Author = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+  Author.associate = (models) => {
+    Author.hasMany(models.Book, {
+      onDelete: "CASCADE",
+      foreignKey: {
+        // name: "author_id",
+        allowNull: false,
+      },
+    });
+  }
   return Author;
 };
 

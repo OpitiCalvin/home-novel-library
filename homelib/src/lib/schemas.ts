@@ -56,9 +56,21 @@ export interface IBookAndAuthorResponse {
   readStatus: string;
   authorId: number;
   author: IAuthor;
-  // bookImages:IBookImageResponse[]
-  // genre: IGenre;
 };
+
+export interface IBookAuthorGenreResponse {
+  id: number;
+  title: string;
+  publishedYear: number;
+  isbn: string;
+  description: string;
+  availabilityStatus: string;
+  readStatus: string;
+  authorId: number;
+  author: IAuthor;
+  genres: IGenreResponse[];
+};
+
 
 export interface IBook {
   title: string;

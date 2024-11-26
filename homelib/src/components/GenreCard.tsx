@@ -11,6 +11,7 @@ const GenreCard: FunctionComponent<Props> = ({ genre }) => {
   return (
     <div className="bg-white shadow-md rounded-md p-4 text-center">
       <h2 className="text-2xl font-semibold text-gray-800">{genre.name}</h2>
+      <p className="text-sm text-gray-500">{genre.description}</p>
       <hr className="my-2" />
       <div>
         <Link href={`/genres/${genre.id}`}>

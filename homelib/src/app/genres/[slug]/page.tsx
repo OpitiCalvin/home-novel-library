@@ -3,8 +3,8 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
-import { fetcher } from "@/api/apiFetcher";
-import { IGenreAndBooksResponse } from "@/utils/schemas";
+import { fetcher } from "@/lib/apiFetcher";
+import { IGenreAndBooksResponse } from "@/lib/schemas";
 import BookCardMinimal from "@/components/BookCardMinimal";
 
 const Page: React.FC = () => {

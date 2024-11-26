@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { IBookResponse } from "@/utils/schemas";
+import { IBookResponse } from "@/lib/schemas";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
-import { fetcher } from "@/api/apiFetcher";
+import { fetcher } from "@/lib/apiFetcher";
 import BookCard from "@/components/BookCard";
 import BookImageSlider from "@/components/BookImageSlider";
 

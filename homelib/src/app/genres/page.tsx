@@ -1,8 +1,10 @@
 import React from "react";
-import { IGenreResponse } from "../../utils/schemas";
 import GenreCard from "../../components/GenreCard";
 import Link from "next/link";
-import { getAllGenres } from "@/api/genres";
+import { getAllGenres } from "@/lib/fetchers/genres";
+import { IGenreResponse } from "@/lib/schemas";
+
+export const dynamic = "force-dynamic";
 
 const GenreList: React.FC = async () => {
   const genres: IGenreResponse[] = await getAllGenres();

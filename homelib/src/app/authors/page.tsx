@@ -4,6 +4,8 @@ import AuthorCard from "../../components/AuthorCard";
 import Link from "next/link";
 import { getAllAuthors } from "@/lib/fetchers/authors";
 
+export const dynamic = "force-dynamic";
+
 const AuthorList: React.FC = async () => {
   const authors: IAuthorResponse[] = await getAllAuthors();
   return (

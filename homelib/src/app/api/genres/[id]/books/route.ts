@@ -1,17 +1,20 @@
-import Genre from "@/database/models/genre";
-import Book from "@/database/models/book";
+import { Genre, Book } from "@/database/models";
 import { NextResponse } from "next/server";
 
 export const GET = async (
   request: Request,
   { params }: { params: { id: number } }
 ) => {
+  const { id: genreId } = await params;
   try {
-    const genre = await Genre.findByPk(params.id, {
+    const genre = await Genre.findByPk(genreId, {
       include: {
         model: Book,
         attributes: {
           exclude: ["createdAt", "updatedAt", "book_genre"],
+        },
+        through: {
+          attributes: [],
         },
       },
       attributes: {

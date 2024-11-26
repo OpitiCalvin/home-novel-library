@@ -1,18 +1,27 @@
-import Book from "@/database/models/book";
-import Author from "@/database/models/author";
+import {Book, Author, Genre} from "@/database/models";
 import { NextResponse } from "next/server";
 
 export const GET = async (
   request: Request,
   { params }: { params: { id: number } }
 ) => {
+  const { id: bookId } = await params;
   try {
-    const book = await Book.findByPk(params.id, {
+    const book = await Book.findByPk(bookId, {
       include: [
         {
           model: Author,
           attributes: {
             exclude: ["createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: Genre,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+          through: {
+            attributes: [],
           },
         },
       ],
@@ -38,8 +47,9 @@ export const DELETE = async (
   request: Request,
   { params }: { params: { id: number } }
 ) => {
+  const { id: bookId } = await params;
   try {
-    const book = await Book.findByPk(params.id);
+    const book = await Book.findByPk(bookId);
     if (!book) {
       return NextResponse.json({ message: "Book not found!" }, { status: 404 });
     }

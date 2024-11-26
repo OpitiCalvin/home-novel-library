@@ -1,13 +1,13 @@
-import Author from "@/database/models/author";
-import Book from "@/database/models/book";
+import { Book, Author } from "@/database/models";
 import { NextResponse } from "next/server";
 
 export const GET = async (
   request: Request,
   { params }: { params: { id: number } }
 ) => {
+  const { id: authorId } = await params;
   try {
-    const author = await Author.findByPk(params.id, {
+    const author = await Author.findByPk(authorId, {
       include: {
         model: Book,
         attributes: { exclude: ["createdAt", "updatedAt"] },

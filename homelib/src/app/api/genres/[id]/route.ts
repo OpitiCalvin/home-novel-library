@@ -1,12 +1,13 @@
-import Genre from "@/database/models/genre";
+import {Genre} from "@/database/models";
 import { NextResponse } from "next/server";
 
 export const GET = async (
   request: Request,
   { params }: { params: { id: number } }
 ) => {
+  const { id: genreId } = await params;
   try {
-    const genre = await Genre.findByPk(params.id, {
+    const genre = await Genre.findByPk(genreId, {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
@@ -29,8 +30,9 @@ export const DELETE = async (
   request: Request,
   { params }: { params: { id: number } }
 ) => {
+  const { id: genreId } = await params;
   try {
-    const genre = await Genre.findByPk(params.id);
+    const genre = await Genre.findByPk(genreId);
     if (!genre) {
       return NextResponse.json(
         { message: "Genre not found!" },

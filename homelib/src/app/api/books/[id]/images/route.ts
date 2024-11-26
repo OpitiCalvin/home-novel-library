@@ -1,23 +1,23 @@
-import Book from "@/database/models/book";
-import BookImage from "@/database/models/bookImage";
+import { Book, BookImage } from "@/database/models";
 import { NextResponse } from "next/server";
 
 export const GET = async (
   request: Request,
   { params }: { params: { id: number } }
 ) => {
+  const { id: bookId } = await params;
   try {
-    const book = await Book.findByPk(params.id);
+    const book = await Book.findByPk(bookId);
     if (!book) {
       return NextResponse.json(
-        { message: `Book not found with id ${params.id}` },
+        { message: `Book not found with id ${bookId}` },
         { status: 404 }
       );
     }
 
     const bookImages = await BookImage.findAll({
       where: {
-        bookId: params.id,
+        bookId: bookId,
       },
       attributes: {
         exclude: ["createdAt", "updatedAt"],

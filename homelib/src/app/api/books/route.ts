@@ -1,6 +1,4 @@
-import Book from "@/database/models/book";
-import Author from "@/database/models/author";
-import Genre from "@/database/models/genre";
+import { Book, Author, Genre } from "@/database/models";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
@@ -11,6 +9,15 @@ export const GET = async () => {
           model: Author,
           attributes: {
             exclude: ["createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: Genre,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+          through: {
+            attributes: [],
           },
         },
       ],
@@ -40,36 +47,50 @@ export const POST = async (req: any) => {
       authorId,
       genres,
     } = await req.json();
-    console.log(`title- ${title} author id - ${authorId} genres - ${genres}`);
 
-    let bookGenres;
-    const book = await Book.create({
-      title: title,
-      publishedYear: publishedYear,
-      isbn: isbn,
-      availabilityStatus: availabilityStatus,
-      readStatus: readStatus,
-      description: description,
-      authorId: authorId,
-    });
-
-    if (genres !== undefined) {
-      bookGenres = await Genre.findAll({ where: { id: genres } });
-    }
-    if (bookGenres?.length > 0) {
-      bookGenres.addGenres(bookGenres).then(() => {
-        NextResponse.json(
-          {
-            message: "Book created successfully.",
-            book: book,
-            genres: bookGenres,
-          },
-          { status: 201 }
-        );
-      });
-    } else {
+    const author = await Author.findByPk(authorId);
+    if (!author) {
       return NextResponse.json(
-        { message: "Book created successfully.", book: book },
+        { message: "author with given id not found" },
+        { status: 400 }
+      );
+    }
+
+    if (!genres) {
+      return NextResponse.json(
+        { message: "`genres` (number or number[] is required" },
+        { status: 400 }
+      );
+    }
+
+    const bookGenres = await Genre.findAll({ where: { id: genres } });
+
+    if (!bookGenres || bookGenres.length === 0) {
+      return NextResponse.json(
+        {
+          message: "Book not created as genre(s) don't exist in our database.",
+        },
+        { status: 400 }
+      );
+    }
+    if (bookGenres && bookGenres?.length > 0) {
+      const book = await Book.create({
+        title: title,
+        publishedYear: publishedYear,
+        isbn: isbn,
+        availabilityStatus: availabilityStatus,
+        readStatus: readStatus,
+        description: description,
+        authorId: authorId,
+      });
+
+      await book.addGenres(bookGenres);
+      return NextResponse.json(
+        {
+          message: "Book created successfully.",
+          book: book,
+          genres: bookGenres,
+        },
         { status: 201 }
       );
     }

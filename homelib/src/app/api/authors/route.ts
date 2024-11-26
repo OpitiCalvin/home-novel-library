@@ -1,5 +1,4 @@
-// import db from "@/database/models";
-import Author from "@/database/models/author";
+import {Author} from "@/database/models";
 import { NextResponse } from "next/server";
 
 // export const dynamic = "force-dynamic";

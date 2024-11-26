@@ -1,11 +1,21 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from ".";
-import Book from "./book";
+import sequelize from "./connection";
 
 class Author extends Model {
   declare id: number;
   declare name: string;
   declare bio: string;
+
+  // static associate(models) {
+  //   Author.hasMany(models.Book, {
+  //     onDelete: "CASCADE",
+  //     foreignKey: {
+  //       allowNull: false,
+  //       // name: "author_id",
+  //     },
+  //   });
+  //   models.Book.belongsTo(Author);
+  // }
 }
 
 Author.init(
@@ -27,18 +37,10 @@ Author.init(
   },
   {
     sequelize,
-    // modelName: "Author",
+    modelName: "author",
     tableName: "authors",
     underscored: true,
   }
 );
-
-Author.hasMany(Book, {
-  onDelete: "CASCADE",
-  foreignKey: {
-    allowNull: false,
-  },
-});
-Book.belongsTo(Author);
 
 export default Author;

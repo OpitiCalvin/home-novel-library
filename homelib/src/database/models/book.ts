@@ -1,8 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from ".";
-// import BookImage from "./bookImage";
-// import Genre from "./genre";
-// import BookGenre from "./bookGenre";
+import sequelize from "./connection";
 
 class Book extends Model {
   declare id: number;
@@ -13,15 +10,16 @@ class Book extends Model {
   declare availabilityStatus: string;
   declare readStatus: string;
 
-  static associate(models) {
-    Book.hasMany(models.BookImage, {
-      onDelete: "CASCADE",
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    Book.belongsTo(models.Author);
-  }
+  // static associate(models) {
+  //   Book.hasMany(models.BookImage, {
+  //     onDelete: "CASCADE",
+  //     foreignKey: {
+  //       allowNull: false,
+  //     },
+  //   });
+  //   Book.belongsTo(models.Author);
+  //   Book.hasOne(models.Author);
+  // }
 }
 
 Book.init(
@@ -54,26 +52,13 @@ Book.init(
       type: DataTypes.ENUM("Not Started", "In Progress", "Finished", "Stopped"),
       defaultValue: "Not Started",
     },
-    // authorId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
   },
   {
     sequelize,
-    // modelName: "Book",
+    modelName: "book",
     tableName: "books",
     underscored: true,
   }
 );
-
-// Book.hasMany(BookImage, {
-//   onDelete: "CASCADE",
-//   foreignKey: {
-//     allowNull: false,
-//   },
-// });
-// BookImage.belongsTo(Book);
-// Book.belongsToMany(Genre, { through: BookGenre });
 
 export default Book;

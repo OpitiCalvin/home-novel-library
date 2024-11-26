@@ -1,6 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from ".";
-// import Book from "./book";
+import sequelize from "./connection";
 
 class BookImage extends Model {
   declare id: number;
@@ -9,10 +8,11 @@ class BookImage extends Model {
   declare mimetype: string;
   declare size: number;
   declare encoding: string;
-  
-  static associate(models) {
-    BookImage.belongsTo(models.Book);
-  }
+  // declare book_id: number;
+
+  // static associate(models) {
+  //   BookImage.belongsTo(models.Book);
+  // }
 }
 
 BookImage.init(
@@ -43,18 +43,13 @@ BookImage.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // bookId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
   },
   {
     sequelize,
-    // modelName: "BookImage",
+    modelName: "BookImage",
     tableName: "book_images",
     underscored: true,
   }
 );
-// BookImage.belongsTo(Book);
 
 export default BookImage;

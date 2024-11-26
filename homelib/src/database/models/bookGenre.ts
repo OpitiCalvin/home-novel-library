@@ -1,7 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import sequelize from ".";
-import Book from "./book";
-import Genre from "./genre";
+import { Model } from "sequelize";
+import sequelize from "./connection";
 
 class BookGenre extends Model {
   // static associate(models) {
@@ -20,7 +18,5 @@ BookGenre.init(
     timestamps: false,
   }
 );
-Book.belongsToMany(Genre, { through: BookGenre });
-Genre.belongsToMany(Book, { through: BookGenre });
 
 export default BookGenre;

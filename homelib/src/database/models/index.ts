@@ -1,10 +1,27 @@
-import { Sequelize } from "sequelize";
-import { SequelizeOptions } from "sequelize-typescript";
-import { options } from "../config/db.config.mjs";
+import Author from "./author";
+import Book from "./book";
+import BookGenre from "./bookGenre";
+import BookImage from "./bookImage";
+import Genre from "./genre";
 
-const dbOptions = <SequelizeOptions>options;
-dbOptions.dialectModule = require("pg");
+// Associations
+Book.belongsTo(Author, {foreignKey: "authorId"});
+Author.hasMany(Book, {
+  onDelete: "CASCADE",
+  foreignKey: {
+    allowNull: false,
+    name: "authorId"
+  },
+});
+Book.hasMany(BookImage, {
+  onDelete: "CASCADE",
+  foreignKey: {
+    allowNull: false,
+    name: "bookId",
+  },
+});
+BookImage.belongsTo(Book, { foreignKey: "bookId" });
+Book.belongsToMany(Genre, { through: BookGenre });
+Genre.belongsToMany(Book, { through: BookGenre });
 
-const sequelize = new Sequelize(dbOptions);
-
-export default sequelize;
+export { Genre, Author, Book, BookImage, BookGenre };

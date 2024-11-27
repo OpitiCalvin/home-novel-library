@@ -46,13 +46,11 @@ function FormContent({
       </div>
       <div className="mb-4">
         <label className="block text-gray-700">Category</label>
-        <input
-          {...register("category")}
-          placeholder="Category"
-          type="text"
-          name="category"
-          className={inputClasses}
-        />
+        <select {...register("category", {required: "Genre is required."})} className={inputClasses}>
+          <option value="">Select a Category</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+        </select>
         <span className="text-red-500 font-semibold text-sm">
           <ErrorMessage name="category" errors={errors} />
         </span>

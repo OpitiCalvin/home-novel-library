@@ -59,7 +59,7 @@ const ImageSlider: FunctionComponent<Props> = ({ images }) => {
         onMouseLeave={handleMouseLeave}
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_API_URL}/${images[currentIndex].filepath}`}
+          src={`${process.env.NEXT_PUBLIC_API_URL}/images/${images[currentIndex].filename}`}
           alt={`Slider Image ${currentIndex + 1}`}
           layout="fill"
           objectFit="cover"

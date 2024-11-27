@@ -21,6 +21,7 @@
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.4",
     "lucide-react": "^0.461.0",
+    "mime": "^4.0.4",
     "next": "15.0.3",
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
@@ -35,6 +36,7 @@
     "zod-form-data": "^2.0.2"
   },
   "devDependencies": {
+    "@types/mime": "^4.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

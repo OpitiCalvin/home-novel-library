@@ -1,6 +1,8 @@
 import Link from "next/link";
 import BooksPreview from "../components/BooksPreview";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <>

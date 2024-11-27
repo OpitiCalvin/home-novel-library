@@ -9,3 +9,7 @@ services:
       - "3001:3000"
     env_file:
       - ./.env
+    volumes:
+      - ./public:/home/nextjs/app/public
+      - ./uploads:/home/nextjs/app/uploads
+      # - ./logs:/home/nextjs/app/logs

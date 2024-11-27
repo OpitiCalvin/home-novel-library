@@ -10,4 +10,5 @@ services:
       - ./.env
     volumes:
       - ./public:/home/nextjs/app/public
+      - ./uploads:/home/nextjs/app/uploads
       # - ./logs:/home/nextjs/app/logs

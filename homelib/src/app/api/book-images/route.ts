@@ -42,8 +42,8 @@ export const POST = async (req: NextRequest) => {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
         const path = join("uploads", filename);
-        await writeFile(path, buffer);
-        // console.log(`open ${path} to see the uploaded image`);
+        // Write file to public folder
+        await writeFile(join("public", path), buffer);
 
         return {
           bookId: bookId,

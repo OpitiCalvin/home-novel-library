@@ -38,7 +38,7 @@ const BookCard: FunctionComponent<Props> = ({ book }) => {
           <a href={`/books/${book.id}`}>
             <Image
               className="rounded-t-lg"
-              src={`${process.env.NEXT_PUBLIC_API_URL}/${bookImages[randBookId].filepath}`}
+              src={`/${bookImages[randBookId].filepath}`}
               alt="Image of the novel"
               height="0"
               width={382}

@@ -16,7 +16,8 @@ module.exports = {
         allowNull: false,
       },
       category: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM("Fiction","Non-Fiction"),
+        defaultValue: "Fiction",
         allowNull: false,
       },
       description: {

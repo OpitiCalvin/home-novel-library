@@ -25,8 +25,8 @@ Genre.init(
       allowNull: false,
     },
     category: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.ENUM("Fiction", "Non-Fiction"),
+      defaultValue: "Fiction",
     },
     description: {
       type: DataTypes.TEXT,

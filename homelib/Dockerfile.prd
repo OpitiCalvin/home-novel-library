@@ -1,0 +1,35 @@
+FROM node:lts-slim AS base
+
+# Build stage
+FROM base AS build
+
+WORKDIR /app
+
+COPY package*.json .
+
+RUN npm ci
+
+COPY . .
+
+RUN npm run build
+
+# Runtime Stage
+FROM base AS runtime
+
+RUN addgroup --system --gid 1001 nextjs
+RUN adduser --system --uid 1001 nextjs
+
+USER nextjs
+
+WORKDIR /app
+
+COPY --from=build /app/public ./public
+
+RUN mkdir .next
+
+COPY --from=build --chown=nextjs /app/.next/standalone .
+COPY --from=build --chown=nextjs /app/.next/static ./.next/static
+
+ENV NODE_ENV=production
+
+CMD [ "node","server.js" ]

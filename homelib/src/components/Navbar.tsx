@@ -99,6 +99,27 @@ function Navbar(props: Props): ReactElement {
                 Add a Book
               </Link>
             </li>
+            <li className="flex items-center">
+              <Link
+                className={
+                  (props.transparent
+                    ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                    : "text-gray-800 hover:text-gray-600") +
+                  " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                }
+                href="/add-cover-images"
+              >
+                <FontAwesomeIcon
+                  icon={faCirclePlus}
+                  className={
+                    (props.transparent
+                      ? "lg:text-gray-300 text-gray-500"
+                      : "text-gray-500") + " text-lg leading-lg mr-2"
+                  }
+                />{" "}
+                Add Cover Images
+              </Link>
+            </li>
             {/* Sub Menu here */}
             <li className="flex items-center">
               <Link

@@ -5,24 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { IBookImageResponse, IBookAuthorGenreResponse } from "@/lib/schemas";
+import {
+  IBookImageResponse,
+  IBookAndAuthorResponse,
+} from "@/lib/schemas";
 import useSWR from "swr";
 import { fetcher } from "@/lib/apiFetcher";
 
 type Props = {
-  book: IBookAuthorGenreResponse;
+  book: IBookAndAuthorResponse;
 };
-const BookCard: FunctionComponent<Props> = ({ book }) => {
+const AuthorBookCard: FunctionComponent<Props> = ({ book }) => {
   // fetch for book's associated images
   const { data, error, isLoading } = useSWR(`books/${book.id}/images`, fetcher);
   if (error) return <div>Failed to Load.</div>;
   if (isLoading) return <div>Loading books and cover images...</div>;
   if (data) {
-    // list out genres
-    let bookGenres!: string[];
-    if (book?.genres && book?.genres.length > 0) {
-      bookGenres = book?.genres.map((genre) => genre.name);
-    }
     const bookImages: IBookImageResponse[] = data["images"];
     const randBookId: number =
       bookImages?.length > 1
@@ -34,7 +32,7 @@ const BookCard: FunctionComponent<Props> = ({ book }) => {
           <a href={`/books/${book.id}`}>
             <Image
               className="rounded-t-lg"
-              src={`${process.env.NEXT_PUBLIC_API_URL}/images/${bookImages[randBookId].filename}`}
+              src={`/api/images/${bookImages[randBookId].filename}`}
               alt="Image of the novel"
               height="0"
               width={382}
@@ -62,12 +60,6 @@ const BookCard: FunctionComponent<Props> = ({ book }) => {
           <p className="text-lg text-gray-600">{book.author?.name}</p>
           <p className="text-sm text-gray-500">{book.publishedYear}</p>
           <hr className="my-2" />
-          {bookGenres?.length > 0 && (
-            <>
-              <p className="text-sm text-gray-500">{bookGenres?.join(", ")}</p>
-              <hr className="my-2" />
-            </>
-          )}
           <Link
             href={`/books/${book.id}`}
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -80,4 +72,4 @@ const BookCard: FunctionComponent<Props> = ({ book }) => {
   }
 };
 
-export default BookCard;
+export default AuthorBookCard;

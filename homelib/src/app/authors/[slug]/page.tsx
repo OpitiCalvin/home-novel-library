@@ -1,11 +1,11 @@
 "use client";
 
 import { fetcher } from "@/lib/apiFetcher";
-import BookCard from "@/components/BookCard";
 import { IAuthorAndBooksResponse } from "@/lib/schemas";
 import { useParams } from "next/navigation";
 import React from "react";
 import useSWR from "swr";
+import AuthorBookCard from "@/components/AuthorBookCard";
 
 const SingleAuthor: React.FC = () => {
   const params = useParams();
@@ -37,7 +37,7 @@ const SingleAuthor: React.FC = () => {
             </h1>
             {/* Author's Published Books */}
             {author.books.map((book, index) => (
-              <BookCard key={index} book={book} />
+              <AuthorBookCard key={index} book={book} />
             ))}
           </section>
         )}

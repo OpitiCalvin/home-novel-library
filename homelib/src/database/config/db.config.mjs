@@ -18,13 +18,13 @@ export const options = {
   migrationsStorageTableName: "migrations",
 };
 
-if (process.env.NODE_ENV === "production") {
-  options.dialectOptions = {
-    ssl: {
-      rejectUnauthorized: true,
-    },
-  };
-}
+// if (process.env.NODE_ENV === "production") {
+//   options.dialectOptions = {
+//     ssl: {
+//       rejectUnauthorized: true,
+//     },
+//   };
+// }
 
 export default {
   development: options,

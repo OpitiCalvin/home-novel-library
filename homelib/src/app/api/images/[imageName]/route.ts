@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
 import { BookImage } from "@/database/models";
 
 export const GET = async (
   req: Request,
-  { params }: { params: { imageName: string } }
+  { params }: { params: Promise<{ imageName: string }> }
 ) => {
   try {
     const { imageName } = await params;
@@ -16,9 +16,11 @@ export const GET = async (
       return NextResponse.json({ message: "Image not found" }, { status: 404 });
     }
     // retrieve image mimetype
-    const bookImage = await BookImage.findOne({where: {filename: imageName}})
-    const mimetype = bookImage?.get("mimetype") || "image/*"
-    
+    const bookImage = await BookImage.findOne({
+      where: { filename: imageName },
+    });
+    const mimetype = bookImage?.get("mimetype") || "image/*";
+
     // read the image file
     const imageBuffer = fs.readFileSync(imagePath);
 
@@ -27,7 +29,7 @@ export const GET = async (
     });
   } catch (error) {
     return NextResponse.json(
-      { message: "Failed to load image: " },
+      { message: "Failed to load image", error: error },
       { status: 500 }
     );
   }

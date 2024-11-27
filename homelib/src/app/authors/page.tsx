@@ -22,7 +22,8 @@ const AuthorList: React.FC = async () => {
           href="/authors/add"
         >
           Add Author
-        </Link>      </div>
+        </Link>{" "}
+      </div>
     </section>
   );
 };

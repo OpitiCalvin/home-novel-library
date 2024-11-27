@@ -35,7 +35,7 @@ export const GET = async () => {
   }
 };
 
-export const POST = async (req: any) => {
+export const POST = async (req: Request) => {
   try {
     const {
       title,
@@ -74,17 +74,25 @@ export const POST = async (req: any) => {
       );
     }
     if (bookGenres && bookGenres?.length > 0) {
-      const book = await Book.create({
-        title: title,
-        publishedYear: publishedYear,
-        isbn: isbn,
-        availabilityStatus: availabilityStatus,
-        readStatus: readStatus,
-        description: description,
-        authorId: authorId,
-      });
+      const book = await Book.create(
+        {
+          title: title,
+          publishedYear: publishedYear,
+          isbn: isbn,
+          availabilityStatus: availabilityStatus,
+          readStatus: readStatus,
+          description: description,
+          authorId: authorId,
+          genres: bookGenres,
+        },
+        {
+          include: {
+            model: Genre,
+          },
+        }
+      );
 
-      await book.addGenres(bookGenres);
+      // await book?.addGenres(bookGenres);
       return NextResponse.json(
         {
           message: "Book created successfully.",

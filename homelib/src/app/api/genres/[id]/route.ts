@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const GET = async (
   request: Request,
-  { params }: { params: { id: number } }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   const { id: genreId } = await params;
   try {
@@ -28,7 +28,7 @@ export const GET = async (
 
 export const DELETE = async (
   request: Request,
-  { params }: { params: { id: number } }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   const { id: genreId } = await params;
   try {

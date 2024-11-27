@@ -25,8 +25,8 @@ export const GET = async () => {
 export const POST = async (req: NextRequest) => {
   try {
     const formData = await req.formData();
-    const bookId: number = formData.get("bookId");
-    const files: File[] = formData.getAll("files");
+    const bookId = formData.get("bookId") as string;
+    const files = formData.getAll("files") as File[];
 
     if (!files || files.length === 0) {
       return NextResponse.json(

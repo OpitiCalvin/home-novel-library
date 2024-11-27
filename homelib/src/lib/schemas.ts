@@ -1,9 +1,3 @@
-export interface IAuthorAndBooksResponse {
-  id: number;
-  name: string;
-  bio: string;
-  books: IBookResponse[]
-};
 export interface IAuthor {
   name: string;
   bio: string;
@@ -12,7 +6,13 @@ export interface IAuthorResponse {
   id: number;
   name: string;
   bio: string;
-  books:IBookResponse[]
+  // books:IBookResponse[]
+};
+export interface IAuthorAndBooksResponse {
+  id: number;
+  name: string;
+  bio: string;
+  books: IBookAndAuthorResponse[];
 };
 export interface IGenreResponse {
   id: number;
@@ -55,7 +55,7 @@ export interface IBookAndAuthorResponse {
   availabilityStatus: string;
   readStatus: string;
   authorId: number;
-  author: IAuthor;
+  author?: IAuthor;
 };
 
 export interface IBookAuthorGenreResponse {
@@ -67,8 +67,8 @@ export interface IBookAuthorGenreResponse {
   availabilityStatus: string;
   readStatus: string;
   authorId: number;
-  author: IAuthor;
-  genres: IGenreResponse[];
+  author?: IAuthor;
+  genres?: IGenreResponse[];
 };
 
 

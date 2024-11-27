@@ -1,9 +1,9 @@
 import { Book, Author } from "@/database/models";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
-  request: Request,
-  { params }: { params: { id: number } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   const { id: authorId } = await params;
   try {

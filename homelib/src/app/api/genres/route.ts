@@ -19,7 +19,7 @@ export const GET = async () => {
   }
 };
 
-export const POST = async (req: any) => {
+export const POST = async (req: Request) => {
   try {
     const { name, category, description } = await req.json();
     // console.log("genre info - name", name);

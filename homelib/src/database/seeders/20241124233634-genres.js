@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    return queryInterface.bulkInsert("genres", [
+    await queryInterface.bulkInsert("genres", [
       {
         name: "Fantasy",
         category: "Fiction",
@@ -182,6 +182,28 @@ module.exports = {
           "Books in this genre delve into current scientific and technological developments from technology such as Artificial Intelligence and coding to medical research.",
       },
     ]);
+    await queryInterface.bulkInsert("authors", [
+      {
+        name: "Karin Slaughter",
+        bio: "Karin Slaughter is an American crime writer. She has written 24 novels, which have sold more than 40 million copies and have been published in 120 countries. Her first novel, Blindsighted, was published in 27 languages and made the Crime Writers' Association's Dagger Award shortlist for 'Best Thriller Debut' of 2001.",
+      },
+      {
+        name: "Paul Johnston",
+        bio: "Born and brought up in Edinburgh, Paul Johnston studied ancient and modern Greek at Oxford and now divides his time between Scotland and Greece. As well as four previous Alex Mavros novels, he is the author of the award-winning Quint and Matt Wells crime series.",
+      },
+      {
+        name: "Michael Connelly",
+        bio: "Michael Joseph Connelly (born July 21, 1956) is an American author of detective novels and other crime fiction, notably those featuring LAPD Detective Hieronymus Harry Bosch and criminal defense attorney Mickey Haller.",
+      },
+      {
+        name: "Patricia Cornwell",
+        bio: "Patricia Cornwell is an American crime writer known for her charismatic forensic examiner Dr Kay Scarpetta. She sold her first novel, Postmortem, while working at the Office of the Chief Medical Examiner in Richmond, Virginia. The Scarpetta series has since become an international phenomenon, selling over 100 million copies.",
+      },
+      {
+        name: "Niall Williams",
+        bio: "Niall Williams is an Irish writer. Having started as a non-fiction writer and playwright, he is most well-known as a novelist. Niall’s first novel was FOUR LETTERS OF LOVE. Published in 1997, it went on to become an international bestseller and has since been published in over twenty countries.",
+      },
+    ]);
   },
 
   down: async (queryInterface) => {
@@ -191,6 +213,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    return queryInterface.bulkDelete("genres", null, {});
+    await queryInterface.bulkDelete("genres", null, {});
+    await queryInterface.bulkDelete("authors", null, {});
   },
 };

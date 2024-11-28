@@ -44,7 +44,7 @@ export const POST = async (req: NextRequest) => {
         const buffer = Buffer.from(bytes);
         const path = join("uploads", filename);
         // Write file to public folder
-        await writeFile(join("public", path), buffer);
+        await writeFile(path, buffer);
 
         return {
           bookId: bookId,
@@ -57,7 +57,7 @@ export const POST = async (req: NextRequest) => {
     );
 
     const bookImages = await sequelize.transaction(async (t) => {
-      return await BookImage.bulkCreate(bookImagesData, {transaction: t});
+      return await BookImage.bulkCreate(bookImagesData, { transaction: t });
     });
 
     return NextResponse.json(

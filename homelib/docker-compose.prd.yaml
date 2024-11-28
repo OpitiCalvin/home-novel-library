@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prd
-    container_name: novellib_ui
+    container_name: novellib
     restart: unless-stopped
     ports:
       - "3001:3000"

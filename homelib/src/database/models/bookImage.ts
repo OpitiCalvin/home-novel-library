@@ -39,10 +39,6 @@ BookImage.init(
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-    encoding: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
   },
   {
     sequelize,

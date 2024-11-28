@@ -51,7 +51,6 @@ export const POST = async (req: NextRequest) => {
           filepath: path,
           mimetype: file.type,
           size: file.size,
-          encoding: "guess",
         };
       })
     );

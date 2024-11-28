@@ -143,10 +143,6 @@ module.exports = {
         type: Sequelize.BIGINT,
         allowNull: false,
       },
-      encoding: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       book_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
 import mime from "mime";
 import { BookImage } from "@/database/models";
+import sequelize from "@/database/models/connection";
 
 export const GET = async () => {
   try {
@@ -55,7 +56,9 @@ export const POST = async (req: NextRequest) => {
       })
     );
 
-    const bookImages = await BookImage.bulkCreate(bookImagesData);
+    const bookImages = await sequelize.transaction(async (t) => {
+      return await BookImage.bulkCreate(bookImagesData);
+    });
 
     return NextResponse.json(
       { message: "Book Images uploaded successfully.", bookImages: bookImages },

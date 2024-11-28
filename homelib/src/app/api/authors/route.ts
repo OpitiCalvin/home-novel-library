@@ -1,4 +1,5 @@
-import {Author} from "@/database/models";
+import { Author } from "@/database/models";
+import sequelize from "@/database/models/connection";
 import { NextResponse } from "next/server";
 
 // export const dynamic = "force-dynamic";
@@ -23,10 +24,13 @@ export const GET = async () => {
 export const POST = async (req: Request) => {
   try {
     const { name, bio } = await req.json();
-    const author = await Author.create({
-      name: name,
-      bio: bio,
+    const author = await sequelize.transaction(async (t) => {
+      return await Author.create({
+        name: name,
+        bio: bio,
+      });
     });
+
     return NextResponse.json(
       { message: "Author created successfully.", author: author },
       { status: 201 }

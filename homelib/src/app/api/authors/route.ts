@@ -25,10 +25,13 @@ export const POST = async (req: Request) => {
   try {
     const { name, bio } = await req.json();
     const author = await sequelize.transaction(async (t) => {
-      return await Author.create({
-        name: name,
-        bio: bio,
-      });
+      return await Author.create(
+        {
+          name: name,
+          bio: bio,
+        },
+        { transaction: t }
+      );
     });
 
     return NextResponse.json(

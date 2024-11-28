@@ -57,7 +57,7 @@ export const POST = async (req: NextRequest) => {
     );
 
     const bookImages = await sequelize.transaction(async (t) => {
-      return await BookImage.bulkCreate(bookImagesData);
+      return await BookImage.bulkCreate(bookImagesData, {transaction: t});
     });
 
     return NextResponse.json(

@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import Navigation from "@/components/Navigation";
 config.autoAddCss = false;
 
 const geistSans = localFont({
@@ -36,7 +36,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="flex flex-col min-h-screen">
-          <Navbar transparent={false} />
+          <Navigation/>
           <main className="flex-1 items-center py-10 px-4">{children}</main>
           <Footer />
         </div>

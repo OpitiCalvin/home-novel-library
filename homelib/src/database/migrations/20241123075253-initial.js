@@ -12,11 +12,11 @@ module.exports = {
         primaryKey: true,
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         allowNull: false,
       },
       category: {
-        type: Sequelize.ENUM("Fiction","Non-Fiction"),
+        type: Sequelize.ENUM("Fiction", "Non-Fiction"),
         defaultValue: "Fiction",
         allowNull: false,
       },
@@ -43,7 +43,7 @@ module.exports = {
         primaryKey: true,
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         allowNull: false,
       },
       bio: {
@@ -70,7 +70,7 @@ module.exports = {
         primaryKey: true,
       },
       title: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         allowNull: false,
       },
       published_year: {
@@ -78,7 +78,7 @@ module.exports = {
         allowNull: false,
       },
       isbn: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(15),
         allowNull: false,
         unique: true,
       },
@@ -128,15 +128,15 @@ module.exports = {
         primaryKey: true,
       },
       filename: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
         allowNull: false,
       },
       filepath: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       mimetype: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       size: {

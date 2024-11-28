@@ -31,7 +31,7 @@ Book.init(
       primaryKey: true,
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
     publishedYear: {
@@ -39,7 +39,7 @@ Book.init(
       allowNull: false,
     },
     isbn: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(15),
       allowNull: false,
       unique: true,
     },

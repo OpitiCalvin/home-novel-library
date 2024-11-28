@@ -13,6 +13,11 @@ COPY . .
 
 RUN npm run build
 
+# Run Sequelize migrations and seed the database
+RUN npm run migrate && \
+    npm run seed
+
+
 # Runtime Stage
 FROM base AS runtime
 
@@ -31,5 +36,8 @@ COPY --from=build --chown=nextjs /app/.next/standalone .
 COPY --from=build --chown=nextjs /app/.next/static ./.next/static
 
 ENV NODE_ENV=production
+
+# Expose the port Next.js app will run on
+EXPOSE 3000
 
 CMD [ "node","server.js" ]

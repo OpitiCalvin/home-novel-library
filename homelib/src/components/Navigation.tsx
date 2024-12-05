@@ -19,8 +19,6 @@ const Navigation: React.FC = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { data: session } = useSession();
 
-  console.log({ session });
-
   // Function to toggle menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -98,7 +96,10 @@ const Navigation: React.FC = () => {
                 )}
               </>
             ) : (
-              <button className="" onClick={() => signIn()}>
+              <button
+                className="text-black dark:text-gray-200 hover:text-gray-400 dark:hover:text-gray-400 focus:outline-none"
+                onClick={() => signIn()}
+              >
                 Sign In{" "}
               </button>
             )}

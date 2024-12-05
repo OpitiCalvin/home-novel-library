@@ -7,8 +7,8 @@ interface Props {
     children: ReactNode;
 }
 
-function Provider({children}: Props) {
-    return <SessionProvider>{children}</SessionProvider>
+function AuthProvider({ children }: Props) {
+  return <SessionProvider>{children}</SessionProvider>;
 }
 
-export default Provider;
+export default AuthProvider;

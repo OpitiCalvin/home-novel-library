@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Navigation from "@/components/Navigation";
-import Provider from "@/Provider";
+import AuthProvider from "@/AuthProvider";
 config.autoAddCss = false;
 
 const geistSans = localFont({
@@ -36,13 +36,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Provider>
+        <AuthProvider>
           <div className="flex flex-col min-h-screen">
             <Navigation />
             <main className="flex-1 items-center py-10 px-4">{children}</main>
             <Footer />
           </div>
-        </Provider>
+        </AuthProvider>
       </body>
     </html>
   );

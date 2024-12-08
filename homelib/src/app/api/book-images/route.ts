@@ -4,6 +4,7 @@ import { join } from "path";
 import mime from "mime";
 import { BookImage } from "@/database/models";
 import sequelize from "@/database/models/connection";
+import { getServerSession } from "next-auth";
 
 export const GET = async () => {
   try {
@@ -24,6 +25,11 @@ export const GET = async () => {
 };
 
 export const POST = async (req: NextRequest) => {
+  const session = await getServerSession();
+  if (!session) {
+    return NextResponse.json({ message: "Not Authenticated" }, { status: 401 });
+  }
+
   try {
     const formData = await req.formData();
     const bookId = formData.get("bookId") as string;

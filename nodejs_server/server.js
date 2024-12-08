@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const sequelize = require("./models");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const logger = require("./config/logging");
 const morganMiddleware = require("./middleware/requests_logging");
@@ -18,6 +19,7 @@ const app = express();
 
 app.use(morganMiddleware);
 app.use(cors());
+app.use(cookieParser());
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -44,7 +46,7 @@ app.get("/", (req, res, next) => {
 });
 
 // CRUD routes
-app.use("/api/users", userRoutes);
+app.use("/api/auth", userRoutes);
 app.use("/api/authors", authorRoutes);
 app.use("/api/genres", genreRoutes);
 app.use("/api/books", bookRoutes);

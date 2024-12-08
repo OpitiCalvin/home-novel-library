@@ -3,7 +3,7 @@
 import React, { ReactElement, useState } from "react";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
   faArrowAltCircleDown,
   faBars,
@@ -13,6 +13,7 @@ import {
   faFileAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { faSignIn } from "@fortawesome/free-solid-svg-icons/faSignIn";
 
 interface Props {
   transparent?: boolean;
@@ -171,17 +172,17 @@ function Navbar(props: Props): ReactElement {
                     : "text-gray-800 hover:text-gray-600") +
                   " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                 }
-                href="#pablo"
+                href="/login"
               >
                 <FontAwesomeIcon
-                  icon={faTwitter}
+                  icon={faSignIn}
                   className={
                     (props.transparent
                       ? "lg:text-gray-300 text-gray-500"
                       : "text-gray-500") + " text-lg leading-lg "
                   }
                 />
-                <span className="lg:hidden inline-block ml-2">Tweet</span>
+                <span className="lg:hidden inline-block ml-2">Sign In</span>
               </Link>
             </li>
 

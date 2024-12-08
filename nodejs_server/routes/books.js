@@ -1,5 +1,5 @@
 const express = require("express");
-const auth = require("../middleware/auth");
+const { adminAuth } = require("../middleware/auth");
 const controller = require("../controllers/books");
 
 const router = express.Router();
@@ -14,7 +14,7 @@ router.get("/:id", controller.getBook);
 router.get("/:id/images", controller.getBookImages);
 
 // create a new book
-router.post("/", controller.createBook);
+router.post("/", adminAuth, controller.createBook);
 
 // update a book
 router.put("/:id", controller.updateBook);

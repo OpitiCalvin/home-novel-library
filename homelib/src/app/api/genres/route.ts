@@ -1,5 +1,6 @@
 import { Genre } from "@/database/models";
 import sequelize from "@/database/models/connection";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
@@ -21,6 +22,11 @@ export const GET = async () => {
 };
 
 export const POST = async (req: Request) => {
+  const session = await getServerSession();
+  if (!session) {
+    return NextResponse.json({ message: "Not Authenticated" }, { status: 401 });
+  }
+
   try {
     const { name, category, description } = await req.json();
 

@@ -2,6 +2,7 @@
 
 import { registrationSchema } from "@/formValidators/userRegistration";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -16,20 +17,21 @@ export default function RegisterForm() {
 
   const onSubmit = async (data: RegistrationData) => {
     try {
-      console.log("Registration Data", data);
       const res = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       });
       if (!res.ok) {
-        console.log("Error with registration");
+        // console.log("Error with registration");
+        alert("Error with registration");
       }
       const { message } = await res.json();
-      console.log("message", message);
       alert("Registration successful!");
+      redirect("/auth/login");
     } catch (error) {
-      console.error("Validatiaon Error", error);
+      // console.error("Validatiaon Error", error);
+      alert("Error occurred while attempting user registration");
     }
   };
 

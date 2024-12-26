@@ -7,6 +7,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Navigation from "@/components/Navigation";
 import AuthProvider from "@/AuthProvider";
+import { Toaster } from "sonner";
 config.autoAddCss = false;
 
 const geistSans = localFont({
@@ -39,6 +40,7 @@ export default function RootLayout({
         <AuthProvider>
           <div className="flex flex-col min-h-screen">
             <Navigation />
+            <Toaster richColors />
             <main className="flex-1 items-center py-10 px-4">{children}</main>
             <Footer />
           </div>

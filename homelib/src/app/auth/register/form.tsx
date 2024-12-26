@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "sonner";
 
 type RegistrationData = z.infer<typeof registrationSchema>;
 
@@ -24,14 +25,16 @@ export default function RegisterForm() {
       });
       if (!res.ok) {
         // console.log("Error with registration");
-        alert("Error with registration");
+        toast.error("User Registraion Failed!!");
+        // alert("Error with registration");
+      } else {
+        const { message } = await res.json();
+        toast.success(message);
+        redirect("/auth/login");
       }
-      const { message } = await res.json();
-      alert("Registration successful!");
-      redirect("/auth/login");
     } catch (error) {
-      // console.error("Validatiaon Error", error);
-      alert("Error occurred while attempting user registration");
+      console.error("Validatiaon Error", error);
+      toast.error("Error occurred while attempting user registration");
     }
   };
 

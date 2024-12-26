@@ -33,7 +33,7 @@ export default function RegisterForm() {
         redirect("/auth/login");
       }
     } catch (error) {
-      // console.error("Validatiaon Error", error);
+      console.error("Validatiaon Error", error);
       toast.error("Error occurred while attempting user registration");
     }
   };

@@ -2,7 +2,7 @@
 
 import { registrationSchema } from "@/formValidators/userRegistration";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -16,6 +16,8 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm<RegistrationData>({ resolver: zodResolver(registrationSchema) });
 
+  const router = useRouter();
+
   const onSubmit = async (data: RegistrationData) => {
     try {
       const res = await fetch("/api/auth/register", {
@@ -24,17 +26,16 @@ export default function RegisterForm() {
         headers: { "Content-Type": "application/json" },
       });
       if (!res.ok) {
-        // console.log("Error with registration");
-        toast.error("User Registraion Failed!!");
-        // alert("Error with registration");
-      } else {
-        const { message } = await res.json();
-        toast.success(message);
-        redirect("/auth/login");
+        throw new Error("User registration Failed");
       }
+      const { message } = await res.json();
+      toast.success(message);
+      router.push("/auth/login");
+      router.refresh()
     } catch (error) {
       console.error("Validatiaon Error", error);
       toast.error("Error occurred while attempting user registration");
+      toast.error("User Registraion Failed!!");
     }
   };
 

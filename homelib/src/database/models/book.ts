@@ -45,7 +45,7 @@ Book.init(
     },
     description: DataTypes.TEXT,
     availabilityStatus: {
-      type: DataTypes.ENUM("Available", "Loaned Out"),
+      type: DataTypes.ENUM("Available", "Loaned Out", "In Wish List"),
       defaultValue: "Available",
     },
     readStatus: {

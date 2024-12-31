@@ -27,14 +27,11 @@ export default function LoginForm() {
         password: data.password,
         redirect: false,
       });
-      console.log({ res });
+      
       if (res?.error) {
         console.log("res error :::: ", res);
         setMessage(res.error);
       } else {
-        // setMessage(res.message);
-        // Optionally, save the JWT in localStorage or a cookie
-        // localStorage.setItem('jwt': response.data.jwt)
         router.push("/");
         router.refresh();
       }

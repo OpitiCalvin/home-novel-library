@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 // const inputClasses =
 //   "px-4 py-2 block border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 border-gray-400 w-full";
@@ -69,13 +70,13 @@ const Page: React.FunctionComponent = () => {
       }
       const { message } = await resp.json();
       if (message) {
-        alert(message);
-        reset();
+        toast.success(message)
         setSelectedFiles([]);
+        reset();
       }
     } catch (error) {
       console.log("Failed to submit form", error);
-      alert(error);
+      toast.error("Error uploading images")
     }
   };
 

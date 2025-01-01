@@ -5,6 +5,7 @@ import mime from "mime";
 import { BookImage } from "@/database/models";
 import sequelize from "@/database/models/connection";
 import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 export const GET = async () => {
   try {
@@ -25,7 +26,7 @@ export const GET = async () => {
 };
 
 export const POST = async (req: NextRequest) => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ message: "Not Authenticated" }, { status: 401 });
   }

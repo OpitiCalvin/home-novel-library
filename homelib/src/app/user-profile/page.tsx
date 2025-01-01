@@ -1,7 +1,6 @@
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
-import { getUserWithId } from "@/dal/users";
 import { Metadata } from "next";
 
 interface UserProfileProps {
@@ -62,7 +61,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   const session = await getServerSession(authOptions);
   if (session) {
-    const user = await getUserWithId(session.user.id);
+    const user = session.user
     if (user) {
       return <UserProfile user={user} />;
     }

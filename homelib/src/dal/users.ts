@@ -31,6 +31,21 @@ export async function getUserWithEmail(userEmail: string) {
   }
 }
 
+export async function getUserWithId(userId: string) {
+  try {
+    if (!userId) {
+      return null;
+    }
+    const user = User.findByPk(userId, {
+      attributes: { exclude: ["password", "createdAt", "updatedAt"] }
+    });
+    return user;
+  } catch (error) {
+    console.error("Error retrieving user", error);
+    return null;
+  }
+}
+
 export async function loginUser(email: string, password: string) {
   try {
     const user = await User.findOne({

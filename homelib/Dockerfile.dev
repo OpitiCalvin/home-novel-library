@@ -14,8 +14,7 @@ COPY . .
 RUN npm run build
 
 # Run Sequelize migrations and seed the database
-RUN npm run migrate && \
-    npm run seed
+RUN npm run migrate
 
 # Runtime Stage
 FROM base AS runtime

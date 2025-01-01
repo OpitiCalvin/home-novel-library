@@ -10,7 +10,6 @@ import { BookSelect } from "../../components/BookSelect";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
-import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 // const inputClasses =

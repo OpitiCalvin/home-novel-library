@@ -1,11 +1,10 @@
-import { NextAuthOptions, User } from "next-auth";
+import { NextAuthOptions, User} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { loginUser } from "@/dal/users";
 
 interface ExtendedUser extends User {
-  role?: string;
+  role: string;
 }
-
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -27,24 +26,19 @@ export const authOptions: NextAuthOptions = {
     signIn: "/auth/login",
   },
   session: { strategy: "jwt", maxAge: 2 * 60 * 60 },
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async jwt({ token, account, user }) {
-      if (account?.provider === "credentials") {
-        token.credentials = true;
-      }
-      if (user) {
-        const extUser: ExtendedUser = user;
-        token.email = user.email;
+    jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
         token.id = user.id;
-        token.role = extUser.role;
+        token.role = (user as ExtendedUser).role;
       }
       return token;
     },
-    async session({ session, token }) {
-      if (token) {
-        session.user = token;
-      }
-      // session.user = token as any;
+    session({ session, token }) {
+      session.user.id = token.id;
+      session.user.role = token.role
       return session;
     },
   },

@@ -1,14 +1,7 @@
 import { GenreForm } from "@/components/genreForm";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import React from "react";
 
 const AddGenre = async () => {
-  const session = await getServerSession();
-  if (!session) {
-    redirect("/auth/login");
-  }
-
   return (
     <section className="grid place-items-center py-8 px-4">
       <h1 className="text-center text-4xl font-bold text-gray-800 mb-8">

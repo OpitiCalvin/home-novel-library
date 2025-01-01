@@ -15,6 +15,7 @@
     "seed": "dotenv -- sequelize-cli db:seed:all"
   },
   "dependencies": {
+    "@auth/sequelize-adapter": "^2.7.4",
     "@fortawesome/free-brands-svg-icons": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",

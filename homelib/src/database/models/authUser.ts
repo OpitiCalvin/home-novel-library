@@ -2,8 +2,8 @@ import { Model, DataTypes } from "sequelize";
 import sequelize from "./connection";
 
 class User extends Model {
-  declare id: number;
-  declare username: string;
+  declare id: string;
+  declare name: string;
   declare email: string;
   declare password: string;
   declare role: string;
@@ -12,10 +12,13 @@ class User extends Model {
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING(50),
@@ -31,12 +34,13 @@ User.init(
       defaultValue: "Member",
       allowNull: false,
     },
+    emailVerified: { type: DataTypes.DATE },
+    image: { type: DataTypes.STRING },
   },
   {
     sequelize,
-    modelName: "user",
-    tableName: "users",
-    underscored: true,
+    modelName: "User",
+    tableName: "User",
   }
 );
 

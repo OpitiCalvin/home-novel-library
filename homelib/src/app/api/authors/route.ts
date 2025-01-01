@@ -2,6 +2,7 @@ import { Author } from "@/database/models";
 import sequelize from "@/database/models/connection";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 // export const dynamic = "force-dynamic";
 
@@ -11,6 +12,7 @@ export const GET = async () => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
+      order: [["id", "ASC"]]
     });
     return NextResponse.json(
       { message: "Authors retrieved successfully", authors: authors },
@@ -23,7 +25,7 @@ export const GET = async () => {
 };
 
 export const POST = async (req: Request) => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ message: "Not Authenticated" }, { status: 401 });
   }

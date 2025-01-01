@@ -17,7 +17,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   // Function to toggle menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -70,7 +70,7 @@ const Navigation: React.FC = () => {
             Genres
           </Link>
           <div className="relative">
-            {session ? (
+            {status === "authenticated" ? (
               <>
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -187,7 +187,7 @@ const Navigation: React.FC = () => {
           Genres
         </Link>
         <div className="relative">
-          {session ? (
+          {status === "authenticated" ? (
             <>
               <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}

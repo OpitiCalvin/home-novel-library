@@ -1,7 +1,6 @@
 import React from "react";
 import { IBook, IGenreResponse } from "@/lib/schemas";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { fetcher } from "@/lib/apiFetcher";
 import useSWR from "swr";
 
@@ -40,7 +39,12 @@ export function GenreSelect({
             </option>
           ))}
         </select>
-        <ErrorMessage name="genreId" errors={errors} />
+        {errors.genres && (
+          <span className="text-red-500 font-semibold text-sm">
+            {errors.genres.message}
+          </span>
+        )}
+        {/* <ErrorMessage name="genreId" errors={errors} /> */}
       </div>
     );
   }

@@ -11,6 +11,7 @@ export const GET = async (
       include: {
         model: Book,
         attributes: { exclude: ["createdAt", "updatedAt"] },
+        order: [["id", "ASC"]],
       },
       attributes: {
         exclude: ["createdAt", "updatedAt"],

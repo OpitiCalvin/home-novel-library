@@ -1,14 +1,7 @@
 import { User } from "@/database/models";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 
 export async function getUsers() {
-  const session = await getServerSession();
-  if (!session) {
-    redirect("/auth/login");
-  }
-
   try {
     const users = await User.findAll({
       attributes: {
@@ -23,11 +16,6 @@ export async function getUsers() {
 }
 
 export async function getUserWithEmail(userEmail: string) {
-  const session = await getServerSession();
-  if (!session) {
-    redirect("/auth/login");
-  }
-
   try {
     if (!userEmail) {
       return null;

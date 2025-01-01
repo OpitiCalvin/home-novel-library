@@ -1,7 +1,6 @@
 import React from "react";
 import { IAuthorResponse, IBook } from "@/lib/schemas";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { fetcher } from "@/lib/apiFetcher";
 import useSWR from "swr";
 
@@ -40,9 +39,11 @@ export function AuthorSelect({
             </option>
           ))}
         </select>
-        <span className="text-red-500 font-semibold text-sm">
-          <ErrorMessage name="authorId" errors={errors} />
-        </span>
+        {errors.authorId && (
+          <span className="text-red-500 font-semibold text-sm">
+            {errors.authorId.message}
+          </span>
+        )}
       </div>
     );
   }

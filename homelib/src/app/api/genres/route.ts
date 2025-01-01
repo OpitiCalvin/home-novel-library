@@ -10,6 +10,7 @@ export const GET = async () => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
+      order: [["id", "ASC"]],
     });
 
     return NextResponse.json(

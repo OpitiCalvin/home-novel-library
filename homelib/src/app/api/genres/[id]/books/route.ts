@@ -13,6 +13,7 @@ export const GET = async (
         attributes: {
           exclude: ["createdAt", "updatedAt", "book_genre"],
         },
+        order: [["id", "ASC"]],
         through: {
           attributes: [],
         },

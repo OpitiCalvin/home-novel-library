@@ -27,6 +27,7 @@ export const GET = async () => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
+      order: [["id", "ASC"]],
     });
     return NextResponse.json(
       { message: "Books retrieved successfully", books: books },

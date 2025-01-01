@@ -10,7 +10,6 @@ import { BookSelect } from "../../components/BookSelect";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
-import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
@@ -22,7 +21,6 @@ const buttonClasses =
 export type BookImageFormValues = z.infer<typeof bookImageFormSchema>;
 
 const Page: React.FunctionComponent = () => {
-  const { data: session } = useSession();
   const {
     register,
     handleSubmit,
@@ -70,21 +68,17 @@ const Page: React.FunctionComponent = () => {
       }
       const { message } = await resp.json();
       if (message) {
-        toast.success(message)
+        toast.success(message);
         setSelectedFiles([]);
         reset();
       }
     } catch (error) {
       console.log("Failed to submit form", error);
-      toast.error("Error uploading images")
+      toast.error("Error uploading images");
     }
   };
 
-  if (!session) {
-    redirect("/auth/login");
-  }
-
- return (
+  return (
     <section className="grid place-items-center py-8 px-4">
       <h1 className="text-center text-4xl font-bold text-gray-800 mb-8">
         Add Book Cover Image(s)

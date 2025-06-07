@@ -2,6 +2,7 @@ import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
 import { Metadata } from "next";
+import Image from "next/image";
 
 interface UserProfileProps {
   user: {
@@ -22,7 +23,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
       </h1>
       <div className="bg-white shadow-lg rounded-lg w-full max-w-2xl p-8">
         <div className="flex items-center space-x-6">
-          <img
+          <Image
             src={user?.image || "/default-avatar.png"}
             alt={`${user?.name}'s avatar`}
             className="w-24 h-24 rounded-full object-cover border border-gray-200"

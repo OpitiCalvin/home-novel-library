@@ -9,7 +9,7 @@ type Props = {
 };
 const BookCardMinimal: FunctionComponent<Props> = ({ book }) => {
   return (
-    <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full sm:w-1/2 lg:w-1/4 p-4 bg-white shadow-md border border-gray-200 rounded-lg mb-2 dark:bg-gray-800 dark:border-gray-700">
       <div className="p-5 text-center">
         <a href="#">
           <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">

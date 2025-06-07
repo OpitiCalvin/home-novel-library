@@ -29,14 +29,16 @@ const Page: React.FC = () => {
           </div>
         </section>
         {genre.books.length > 0 && (
-          <section className="grid place-items-center py-4">
+          <section className="text-center py-4">
             <h1 className="text-center text-4xl font-bold text-gray-800 mb-8">
               Books
             </h1>
             {/* Author's Published Books */}
-            {genre.books.map((book, index) => (
-              <BookCardMinimal key={index} book={book} />
-            ))}
+            <div className="flex flex-wrap gap-4">
+              {genre.books.map((book, index) => (
+                <BookCardMinimal key={index} book={book} />
+              ))}
+            </div>
           </section>
         )}
       </>

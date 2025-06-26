@@ -21,7 +21,7 @@ const Page: React.FC = () => {
     return (
       <>
         <section className="grid place-items-center py-8 px-4">
-          <BookCard book={book} />
+          <BookCard book={book} displayDesc={true} />
         </section>
         <section className="text-center py-4 px-2">
           <BookImageSlider bookId={book.id} />

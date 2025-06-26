@@ -11,8 +11,9 @@ import { fetcher } from "@/lib/apiFetcher";
 
 type Props = {
   book: IBookAuthorGenreResponse;
+  displayDesc: boolean;
 };
-const BookCard: FunctionComponent<Props> = ({ book }) => {
+const BookCard: FunctionComponent<Props> = ({ book, displayDesc }) => {
   // fetch for book's associated images
   const { data, error, isLoading } = useSWR(`books/${book.id}/images`, fetcher);
   if (error) return <div>Failed to Load.</div>;
@@ -68,6 +69,13 @@ const BookCard: FunctionComponent<Props> = ({ book }) => {
               <hr className="my-2" />
             </>
           )}
+          {displayDesc && (
+            <>
+              <p className="text-sm text-gray-500">{book.description}</p>
+              <hr className="my-2" />
+            </>
+          )}
+
           <Link
             href={`/books/${book.id}`}
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

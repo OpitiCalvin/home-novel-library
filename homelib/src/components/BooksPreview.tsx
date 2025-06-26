@@ -8,7 +8,7 @@ const BooksPreview = async () => {
   return (
     <>
       {books && books.length > 0 &&
-        books.map((book) => <BookCard key={book.id} book={book} />)}
+        books.map((book) => <BookCard key={book.id} book={book} displayDesc={false} />)}
     </>
   );
 };

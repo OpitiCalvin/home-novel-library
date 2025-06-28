@@ -1,15 +1,43 @@
-import React from "react";
-import { IAuthorResponse } from "@/lib/schemas";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import AuthorCard from "../../components/AuthorCard";
 import Link from "next/link";
-import { getAllAuthors } from "@/lib/fetchers/authors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import Pagination from "@/components/Pagination";
 
 export const dynamic = "force-dynamic";
 
-const AuthorList: React.FC = async () => {
-  const authors: IAuthorResponse[] = await getAllAuthors();
+const AuthorList: React.FC = () => {
+  const [authors, setAuthors] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 6; //items per page
+
+  useEffect(() => {
+    const fetchAuthors = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/authors?page=${currentPage}&limit=${limit}`
+      );
+      const data = await res.json();
+      setAuthors(data.authors);
+      setTotalPages(data.totalPages);
+    };
+    fetchAuthors();
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
   return (
     <>
       <div>
@@ -36,6 +64,12 @@ const AuthorList: React.FC = async () => {
           ))}
         </div>
       </section>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePrevPage={handlePrevPage}
+        handleNextPage={handleNextPage}
+      />
     </>
   );
 };
